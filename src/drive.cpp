@@ -93,7 +93,7 @@ void rightSlew(int rightTarget){
 //slop correction
 void slop(int sp){
   if(sp < 0){
-    right(-50);
+    right(-70);
     delay(120);
   }
 }
@@ -138,7 +138,6 @@ bool isDriving(){
 /**************************************************/
 //autonomous functions
 void driveAsync(int sp){
-  slop(sp);
   reset();
   driveTarget = sp;
   driveMode = true;

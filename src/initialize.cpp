@@ -14,7 +14,7 @@ void autonSelector(void* parameter){
     "big boi",
     "skills",
     "back",
-    "delayed back"
+    "zaccAttack"
   };
 
   //auton selector

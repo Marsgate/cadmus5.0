@@ -44,12 +44,15 @@ void bigBoi(){
 
 /*********************************************************/
 void backSquare(){
+  /*
   //cap throw
   driveAsync(-1.9 TL);
+  while(drivePos() > -1.5 TL) delay(20);
+  setSpeed(60);
   while(drivePos() > -1.7 TL) delay(20);
-  liftFast(200);
+  liftFast(190);
   while(isDriving()) delay(20);
-  turn(-135);
+  turn(-130);
   delay(500);
 
   //retract lift
@@ -69,18 +72,23 @@ void backSquare(){
 
   //intake ball under the cap
   intakeBallAsync();
-  drive(1 TL);
+  drive(1.1 TL);
+  */
+  //intake ball under the nearest cap
+  intakeBallAsync();
+  drive(1.9 TL);
+
 
   //park
-  drive(-.3 TL);
+  drive(-.22 TL);
   turn(90);
-  drive(.8 TL);
+  drive(.5 TL);
   park();
 }
 
 
 /*********************************************************/
-void delayShotBack(){
+void zaccAttack(){
   //intake ball under the nearest cap
   intakeBallAsync();
   drive(1.9 TL);
@@ -88,13 +96,14 @@ void delayShotBack(){
   //back up against wall
   drive(-1.9 TL);
 
-  //align with flags
+  delay(1000);
+
+  //align and shoot flags
   backToFront();
-  doubleShot();
-  lowFlag();
+  wallToFlag();
 
   //park
-  drive(-3 TL);
+  drive(-1 TL);
   turn(-90);
   alliancePark();
 }
@@ -113,13 +122,13 @@ void skills(){
   drive(-1.2 TL);
   drive(.3 TL);
   turn(80);
-  drive(-1 TL);
+  drive(-1.07 TL);
   liftFast(80);
   delay(400);
 
   //stack cap
   drive(1.15 TL);
-  turn(100);
+  turn(99);
   drive(.5 TL);
   reset();
   liftSlow(183);
@@ -131,7 +140,7 @@ void skills(){
   // first flag column =============================
 
   //back up against wall
-  turn(92);
+  turn(91);
   driveAsync(-1.5 TL);
   while(drivePos() > -.7 TL) delay(20);
   setSpeed(70);
@@ -160,7 +169,7 @@ void skills(){
   doubleShot();
 
   //toggle the low flag
-  turn(15);
+  turn(12);
   loadAndClearAsync();
   drive(2.3 TL);
 
@@ -186,7 +195,7 @@ void skills(){
   while(isDriving()) delay(20);
 
   //low flag
-  drive(-.28 TL);
+  drive(-.27 TL);
   intake(127);
   turn(90);
   driveAsync(1.6 TL);
@@ -199,18 +208,18 @@ void skills(){
   //shoot flag
   adjustAsync();
   drive(-2 TL);
-  turn(-19);
+  turn(-20);
   shoot();
 
   //align against the wall
-  turn(-81);
+  turn(-80);
   intake(-127);
   drive(1.4 TL);
 
   //align for park
   drive(-.7 TL);
   turn(-90);
-  drive(1.2 TL);
+  drive(1.1 TL);
   turn(-90);
   drive(.4 TL);
 
@@ -248,7 +257,7 @@ void autonomous() {
       backSquare();
       break;
     case 3:
-      delayShotBack();
+      zaccAttack();
       break;
   }
 

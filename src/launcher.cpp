@@ -1,10 +1,10 @@
 #include "main.h"
 
 static int launcherTarget = 0;
-const int ratchetDistance = 50;
+const int rd = 120;
 
 //motors
-Motor launcher1(LAUNCHER, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
+Motor launcher1(LAUNCHER, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 
 //line sensors
 ADIAnalogIn line('G');
@@ -44,7 +44,7 @@ void ratchet(){
   launcher(127);
   while(isFired()) delay(20);
   launcher1.tare_position();
-  while(launcher1.get_position() < 50) delay(20);
+  while(launcher1.get_position() < rd) delay(20);
   launcher(0);
 }
 
@@ -94,7 +94,7 @@ void launcherOp(){
     launcher1.tare_position();
   }
 
-  if(launcher1.get_position() > 50)
+  if(launcher1.get_position() > rd)
     ready = true;
 
   if(!ready)
