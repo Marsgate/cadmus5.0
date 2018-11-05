@@ -7,6 +7,7 @@
 
 #include "api.h"
 #include "drive.hpp"
+#include "intake.hpp"
 
 using namespace pros;
 using namespace pros::literals;
