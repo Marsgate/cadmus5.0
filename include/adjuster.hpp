@@ -1,5 +1,5 @@
-#ifndef ADJUSTER_H_
-#define ADJUSTER_H_
+#ifndef _ADJUSTER_H_
+#define _ADJUSTER_H_
 
 void adjuster(int vel);
 void adjusterOp();

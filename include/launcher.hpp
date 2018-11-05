@@ -1,5 +1,5 @@
-#ifndef LAUNCHER_H_
-#define LAUNCHER_H_
+#ifndef _LAUNCHER_H_
+#define _LAUNCHER_H_
 
 void launcher(int vel);
 void launcherOp();

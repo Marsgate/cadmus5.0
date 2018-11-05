@@ -9,6 +9,7 @@ void opcontrol() {
 		intakeOp();
 		launcherOp();
 		adjusterOp();
+		descoreOp();
 
 		if(master.get_digital(DIGITAL_LEFT))
 			autonomous();
