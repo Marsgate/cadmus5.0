@@ -8,6 +8,7 @@ void opcontrol() {
 		driveOp();
 		intakeOp();
 		launcherOp();
+		adjusterOp();
 
 		if(master.get_digital(DIGITAL_LEFT))
 			autonomous();
