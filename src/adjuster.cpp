@@ -15,7 +15,7 @@ void adjusterOp(){
 
   adjuster(vel);
 
-  if(master.get_digital(DIGITAL_L2))
+  if(master.get_digital_new_press(DIGITAL_L2))
     vel = 127*d, t = 0, d = -d;
   else if(t > 45)
     adjuster(0);

@@ -9,8 +9,8 @@ static int mirror;
 
 Motor left1(1);
 Motor left2(2);
-Motor right1(-9);
-Motor right2(-10);
+Motor right1(9, 1);
+Motor right2(10, 1);
 
 /**************************************************/
 //basic drive functions
