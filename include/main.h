@@ -8,6 +8,7 @@
 #include "api.h"
 #include "drive.hpp"
 #include "intake.hpp"
+#include "launcher.hpp"
 
 using namespace pros;
 using namespace pros::literals;

@@ -1,7 +1,7 @@
 #include "main.h"
 
 //motors
-Motor intake_1(3);
+Motor intake_1(-3);
 
 //line sensors
 ADIAnalogIn line_L('A');

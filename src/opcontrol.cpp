@@ -7,6 +7,7 @@ void opcontrol() {
 
 		driveOp();
 		intakeOp();
+		launcherOp();
 
 		if(master.get_digital(DIGITAL_LEFT))
 			autonomous();
