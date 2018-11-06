@@ -7,7 +7,7 @@ void autonomous() {
   Task drive_task (driveTask);
   Task turn_task (turnTask);
 
-  autoDrive(2 TL);
+  autoTurn(90);
 
   drive_task.remove();
   turn_task.remove();

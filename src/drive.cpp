@@ -82,10 +82,10 @@ void turnTask(void* parameter){
     if(mirror)
       sp = -sp; // inverted turn speed for blue auton
 
-    double kp = 1.3;
+    double kp = 2.5;
     double kd = 6;
 
-    int sv = (right1.get_position() - left1.get_position())/8;
+    int sv = (right1.get_position() - left1.get_position())/7.2;
     int error = sp-sv;
     int derivative = error - prevError;
     prevError = error;
@@ -93,6 +93,8 @@ void turnTask(void* parameter){
 
     left(-speed);
     right(speed);
+
+    printf("sv: %d\n", sv);
 
     delay(20);
   }
