@@ -1,15 +1,15 @@
 #include "main.h"
 
 //motors
-Motor intake_1(3, 1);
+Motor intake1(3, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
 
 //line sensors
-ADIAnalogIn line_L('A');
-ADIAnalogIn line_R('B');
-ADIAnalogIn line_I('C');
+ADILineSensor line_L('A');
+ADILineSensor line_R('B');
+ADILineSensor line_I('C');
 
 void intake(int vel){
-  intake_1.move(vel);
+  intake1.move(vel);
 }
 
 bool hasBall(){

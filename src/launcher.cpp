@@ -1,13 +1,13 @@
 #include "main.h"
 
 //motors
-Motor launcher_1(4);
+Motor launcher1(4, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
 
 //line sensors
 ADIAnalogIn line('D');
 
 void launcher(int vel){
-  launcher_1.move(vel);
+  launcher1.move(vel);
 }
 
 bool isFired(){
@@ -19,13 +19,15 @@ bool isFired(){
 
 void launcherOp(){
   static int vel = 0;
-  static int t = 0;
+  static int ready = true;
+  static bool first = true;
 
   launcher(vel);
 
-  if(master.get_digital(DIGITAL_R2))
+  if(master.get_digital(DIGITAL_R2)){
     vel = 127;
-  else
+    first = false;
+  }else
     vel = 0;
 
 
@@ -35,20 +37,38 @@ void launcherOp(){
 
 
   //auto ratcheting
-  if(isFired() && !panic)
-    t = 20;
-  if(t > 0)
+  if(isFired() && !panic && !first){
+    ready = false;
+    launcher1.tare_position();
+  }
+
+  if(launcher1.get_position() > 150)
+    ready = true;
+
+  if(!ready)
     vel = 127;
-  t--;
 
 }
 
 //tasks
-void autoShootTask(void * parameter){
+void autoRatchetTask(void* parameter){
+    launcher(127);
+    while(isFired()) delay(20);
+    launcher1.tare_position();
+    while(launcher1.get_position() > 150) delay(20);
+    launcher(0);
+}
+
+void autoRatchet(){
+  Task ratchetTask(autoRatchetTask);
+}
+
+
+
+void autoShootTask(void* parameter){
   launcher(127);
   while(!isFired()) delay(20);
-  delay(500);
-  launcher(0);
+  autoRatchet();
 }
 
 void autoShoot(){

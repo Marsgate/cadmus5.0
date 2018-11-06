@@ -7,10 +7,10 @@ static int maxSpeed = 127;
 static int slant = 0;
 static int mirror;
 
-Motor left1(1);
-Motor left2(2);
-Motor right1(9, 1);
-Motor right2(10, 1);
+Motor left1(9, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
+Motor left2(10, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
+Motor right1(1, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
+Motor right2(2, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 
 /**************************************************/
 //basic drive functions
@@ -82,11 +82,10 @@ void turnTask(void* parameter){
     if(mirror)
       sp = -sp; // inverted turn speed for blue auton
 
-    //int ab = abs(sp); //absolute setpoint
     double kp = 1.3;
     double kd = 6;
 
-    int sv = (right1.get_position() + left1.get_position())/6.2;
+    int sv = (right1.get_position() - left1.get_position())/8;
     int error = sp-sv;
     int derivative = error - prevError;
     prevError = error;

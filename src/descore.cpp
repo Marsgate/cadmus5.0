@@ -1,10 +1,10 @@
 #include "main.h"
 
 //motors
-Motor descore_1(6);
+Motor descore1(6);
 
 void descore(int vel){
-  descore_1.move(vel);
+  descore1.move(vel);
 }
 
 void descoreOp(){
