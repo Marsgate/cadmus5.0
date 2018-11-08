@@ -7,10 +7,56 @@ static int maxSpeed = 127;
 static int slant = 0;
 static int mirror;
 
-Motor left1(9, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
-Motor left2(10, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
-Motor right1(1, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
-Motor right2(2, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
+//slew variables
+const int step = 18;
+static int leftSpeed = 0;
+static int leftTarget = 0;
+static int rightSpeed = 0;
+static int rightTarget = 0;
+
+//motors
+Motor left1(10, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
+Motor left2(9, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
+Motor right1(2, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
+Motor right2(1, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
+
+//sensors
+ADIGyro gyro('E');
+
+
+/**************************************************/
+//slew rate control
+void slewController(void* parameter){
+  while(1){
+
+    //left side
+    if(leftTarget > leftSpeed + step)
+      leftSpeed += step;
+    else if(leftTarget < leftSpeed - step)
+      leftSpeed -= step;
+    else
+      leftSpeed = leftTarget;
+
+    //right side
+    if(rightTarget > rightSpeed + step)
+      rightSpeed += step;
+    else if(rightTarget < rightSpeed - step)
+      rightSpeed -= step;
+    else
+      rightSpeed = rightTarget;
+
+    //set motors
+    left1.move(leftSpeed);
+    left2.move(leftSpeed);
+    right1.move(rightSpeed);
+    right2.move(rightSpeed);
+    delay(20);
+  }
+}
+
+void initSlew(){
+  Task slewTask(slewController);
+}
 
 /**************************************************/
 //basic drive functions
@@ -82,9 +128,10 @@ void turnTask(void* parameter){
     if(mirror)
       sp = -sp; // inverted turn speed for blue auton
 
-    double kp = 2.5;
-    double kd = 6;
+    double kp = .7;
+    double kd = 2;
 
+    //int sv = gyro.get_value();
     int sv = (right1.get_position() - left1.get_position())/7.2;
     int error = sp-sv;
     int derivative = error - prevError;
@@ -94,7 +141,7 @@ void turnTask(void* parameter){
     left(-speed);
     right(speed);
 
-    printf("sv: %d\n", sv);
+    printf("error: %d\n", error);
 
     delay(20);
   }
@@ -109,7 +156,7 @@ bool isDriving(){
   static int lastTarget = 0;
 
   int curr = left1.get_position();
-  int thresh = 1;
+  int thresh = 3;
   int target = turnTarget;
 
   if(driveMode)
@@ -128,7 +175,7 @@ bool isDriving(){
   last = curr;
 
   //not driving if we haven't moved
-  if(count > 4){
+  if(count > 10){
     return false;
   }
   else
@@ -179,4 +226,6 @@ void driveOp(){
   int rJoy = master.get_analog(ANALOG_RIGHT_Y);
   left(lJoy);
   right(rJoy);
+
+  printf("gyro: %f\n", gyro.get_value());
 }
