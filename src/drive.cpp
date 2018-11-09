@@ -5,14 +5,14 @@ static int driveTarget = 0;
 static int turnTarget = 0;
 static int maxSpeed = 127;
 static int slant = 0;
-static int mirror;
 
 //slew variables
-const int step = 18;
+const int step = 14;
 static int leftSpeed = 0;
 static int leftTarget = 0;
 static int rightSpeed = 0;
 static int rightTarget = 0;
+bool slewEnabled = false;
 
 //motors
 Motor left1(10, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
@@ -22,13 +22,12 @@ Motor right2(1, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 
 //sensors
 ADIGyro gyro('E');
-
+ADIDigitalIn mirror('H');
 
 /**************************************************/
 //slew rate control
 void slewController(void* parameter){
   while(1){
-
     //left side
     if(leftTarget > leftSpeed + step)
       leftSpeed += step;
@@ -45,6 +44,11 @@ void slewController(void* parameter){
     else
       rightSpeed = rightTarget;
 
+    if(!slewEnabled){
+      rightSpeed = rightTarget;
+      leftSpeed = leftTarget;
+    }
+
     //set motors
     left1.move(leftSpeed);
     left2.move(leftSpeed);
@@ -54,6 +58,10 @@ void slewController(void* parameter){
   }
 }
 
+void enableSlew(bool enable){
+  slewEnabled = enable;
+}
+
 void initSlew(){
   Task slewTask(slewController);
 }
@@ -61,13 +69,11 @@ void initSlew(){
 /**************************************************/
 //basic drive functions
 void left(int vel){
-  left1.move(vel);
-  left2.move(vel);
+  leftTarget = vel;
 }
 
 void right(int vel){
-  right1.move(vel);
-  right2.move(vel);
+  rightTarget = vel;
 }
 
 void reset(){
@@ -75,14 +81,19 @@ void reset(){
   right1.tare_position();
 }
 
+int drivePos(){
+  return (left1.get_position() + right1.get_position())/2;
+}
+
 /**************************************************/
 //drive tasks
 void driveTask(void* parameter){
+  int prevError = 0;
   while(1){
-    static int prevError = 0;
+    delay(20);
 
     if(!driveMode)
-      return;
+      continue;
 
     int sp = driveTarget;
 
@@ -110,46 +121,48 @@ void driveTask(void* parameter){
     left(speed - slant);
     right(speed + slant);
 
-    printf("sensor value: %d\n", sv);
-
     delay(20);
   }
 }
 
 void turnTask(void* parameter){
+  int prevError;
+
   while(1){
+    delay(20);
+
     if(driveMode)
-      return;
+      continue;
 
-    static int prevError;
+    int sp = turnTarget * 3.6;
 
-    int sp = turnTarget;
-
-    if(mirror)
+    if(!mirror.get_value())
       sp = -sp; // inverted turn speed for blue auton
 
     double kp = .7;
-    double kd = 2;
+    double kd = 3;
 
-    //int sv = gyro.get_value();
-    int sv = (right1.get_position() - left1.get_position())/7.2;
+    int sv = (right1.get_position() - left1.get_position())/2;
     int error = sp-sv;
     int derivative = error - prevError;
     prevError = error;
     int speed = error*kp + derivative*kd;
 
+    if(speed > maxSpeed)
+      speed = maxSpeed;
+    if(speed < -maxSpeed)
+      speed = -maxSpeed;
+
     left(-speed);
     right(speed);
 
-    printf("error: %d\n", error);
+    printf("sv: %f\n", sv);
 
-    delay(20);
   }
 }
 
-
 /**************************************************/
-//drive settle check
+//driving state check
 bool isDriving(){
   static int count = 0;
   static int last = 0;
@@ -194,6 +207,7 @@ void startDrive(int sp){
 }
 
 void startTurn(int sp){
+  maxSpeed = 127;
   reset();
   turnTarget = sp;
   driveMode = false;
@@ -214,7 +228,7 @@ void setSpeed(int speed){
 }
 
 void setSlant(int s){
-  if(mirror)
+  if(!mirror.get_value())
     s = -s;
   slant = s;
 }

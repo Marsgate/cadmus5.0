@@ -54,6 +54,7 @@ void launcherOp(){
 void autoRatchetTask(void* parameter){
     launcher(127);
     while(isFired()) delay(20);
+    while(!isFired()) delay(20);
     launcher1.tare_position();
     while(launcher1.get_position() > 150) delay(20);
     launcher(0);

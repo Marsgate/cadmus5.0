@@ -1,6 +1,11 @@
 #ifndef _DRIVE_H_
 #define _DRIVE_H_
 
+int drivePos();
+
+void enableSlew(bool enable);
+void initSlew();
+
 bool isDriving();
 
 void driveTask(void* parameter);

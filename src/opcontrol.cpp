@@ -4,6 +4,7 @@ Controller master(CONTROLLER_MASTER);
 
 void opcontrol() {
 	while (true){
+    enableSlew(false);
 
 		driveOp();
 		intakeOp();
@@ -11,7 +12,7 @@ void opcontrol() {
 		adjusterOp();
 		descoreOp();
 
-		if(master.get_digital(DIGITAL_LEFT))
+		if(master.get_digital(DIGITAL_LEFT) && !competition::is_connected())
 			autonomous();
 
 		delay(10);

@@ -5,8 +5,9 @@ Motor intake1(3, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
 
 //line sensors
 ADILineSensor line_L('A');
-ADILineSensor line_R('B');
-ADILineSensor line_I('C');
+ADILineSensor line_I('B');
+ADILineSensor line_R('C');
+
 
 void intake(int vel){
   intake1.move(vel);

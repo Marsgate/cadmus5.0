@@ -6,6 +6,7 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
+#include "display/lvgl.h"
 #include "drive.hpp"
 #include "intake.hpp"
 #include "launcher.hpp"
