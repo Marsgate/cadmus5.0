@@ -97,7 +97,7 @@ void driveTask(void* parameter){
 
     int sp = driveTarget;
 
-    double kp = .2;
+    double kp = .3;
     double kd = .5;
 
     //read sensors

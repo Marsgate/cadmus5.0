@@ -10,8 +10,9 @@ static int park = false;
 
 void close(){
   //launch the ball
-  autoShoot();
+  launcher(127);
   while(!isFired()) delay(20);
+  autoRatchet();
   intake(0);
 
   //toggle the low flag
@@ -29,8 +30,10 @@ void close(){
   //flip next cap
   intake(-80);
   startDrive(1.5 TL);
-  while(drivePos() < .6 TL) delay(20);
+  while(drivePos() < .3 TL) delay(20);
   setSpeed(40);
+  while(drivePos() < .6 TL) delay(20);
+  setSpeed(70);
   while(isDriving()) delay(20);
   intake(0);
 
@@ -52,7 +55,7 @@ void far(){
   //launch the ball
   launcher(127);
   while(!isFired()) delay(20);
-  launcher(0);
+  autoRatchet();
 
   //align with wall
   autoDrive(-1.3 TL);
@@ -93,7 +96,7 @@ void far(){
 
 void doubleShot(){
   //back up against wall
-  startDrive(-2.3 TL);
+  startDrive(-2.1 TL);
   setSpeed(60);
   while(drivePos() > -.2 TL) delay(20);
   setSpeed(127);
@@ -101,10 +104,10 @@ void doubleShot(){
 
   //align with flags
   autoDrive(.35 TL);
-  autoTurn(90);
+  autoTurn(89);
 
   //launch the balls
-  autoShoot();
+  launcher(127);
   while(!isFired()) delay(20);
   intake(127);
   autoAdjust(1);
@@ -124,8 +127,8 @@ void bigBoi(){
   close();
 
   //align with flags in the center
-  autoTurn(50);
-  autoAdjust(-1);
+  startAdjust(-1);
+  autoTurn(45);
   autoShoot();
   startDrive(1.8 TL);
   setSlant(40);
@@ -136,13 +139,14 @@ void skills(){
   //flip the nearest cap
   intake(-60);
   startDrive(3 TL);
-  while(drivePos() < 1.2 TL) delay(20);
+  while(drivePos() < 1.5 TL) delay(20);
   setSpeed(60);
   while(drivePos() < 1.9 TL) delay(20);
   intakeBall();
   while(drivePos() < 2.2 TL) delay(20);
   startDrive(-1 TL);
-  while(drivePos() > -.2 TL) delay(20);
+  while(drivePos() > -.5 TL) delay(20);
+
 
   doubleShot();
 
@@ -154,7 +158,7 @@ void skills(){
 
   //align for park
   autoTurn(-90);
-  autoDrive(2 TL);
+  autoDrive(2.15 TL);
   autoTurn(90);
   autoDrive(.7 TL);
 

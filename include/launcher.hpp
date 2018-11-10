@@ -6,6 +6,8 @@ void launcherOp();
 
 bool isFired();
 
+void autoRatchet();
 void autoShoot();
+
 
 #endif

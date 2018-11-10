@@ -4,5 +4,6 @@
 void adjuster(int vel);
 void adjusterOp();
 void autoAdjust(int direction);
+void startAdjust(int direction);
 
 #endif

@@ -1,5 +1,7 @@
 #include "main.h"
 
+static int d = -1;
+
 //motors
 Motor adjuster1(5, MOTOR_GEARSET_6, 1);
 
@@ -15,9 +17,10 @@ void autoAdjust(int direction){
 
 void adjusterOp(){
   static int vel = 0;
-  static int d = -1;
   static int t = 0;
-  t++;
+
+  if(t <= 15)
+    t++;
 
   adjuster(vel);
 
@@ -25,4 +28,17 @@ void adjusterOp(){
     vel = 127*d, t = 0, d = -d;
   else if(t > 15)
     adjuster(0);
+
+}
+
+
+void autoAdjustTask(void* parameter){
+  adjuster(127*d);
+  delay(300);
+  adjuster(0);
+}
+
+void startAdjust(int direction){
+  d = direction;
+  Task adjustTask(autoAdjustTask);
 }
