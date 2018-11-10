@@ -178,13 +178,11 @@ void autonomous() {
   Task drive_task (driveTask);
   Task turn_task (turnTask);
 
-  enableSlew(true);
-
   if(auton.get_value()){
     bigBoi();
     //autoTurn(90);
   }else{
-    skills();
+    //skills();
   }
 
   drive_task.remove();

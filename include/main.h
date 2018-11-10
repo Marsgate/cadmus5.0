@@ -6,12 +6,10 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
-#include "display/lvgl.h"
 #include "drive.hpp"
 #include "intake.hpp"
 #include "launcher.hpp"
 #include "adjuster.hpp"
-#include "descore.hpp"
 
 using namespace pros;
 using namespace pros::literals;

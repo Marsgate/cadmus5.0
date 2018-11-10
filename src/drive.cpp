@@ -6,14 +6,6 @@ static int turnTarget = 0;
 static int maxSpeed = 127;
 static int slant = 0;
 
-//slew variables
-const int step = 14;
-static int leftSpeed = 0;
-static int leftTarget = 0;
-static int rightSpeed = 0;
-static int rightTarget = 0;
-bool slewEnabled = false;
-
 //motors
 Motor left1(10, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
 Motor left2(9, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
@@ -21,59 +13,18 @@ Motor right1(2, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 Motor right2(1, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 
 //sensors
-ADIGyro gyro('E');
 ADIDigitalIn mirror('H');
-
-/**************************************************/
-//slew rate control
-void slewController(void* parameter){
-  while(1){
-    //left side
-    if(leftTarget > leftSpeed + step)
-      leftSpeed += step;
-    else if(leftTarget < leftSpeed - step)
-      leftSpeed -= step;
-    else
-      leftSpeed = leftTarget;
-
-    //right side
-    if(rightTarget > rightSpeed + step)
-      rightSpeed += step;
-    else if(rightTarget < rightSpeed - step)
-      rightSpeed -= step;
-    else
-      rightSpeed = rightTarget;
-
-    if(!slewEnabled){
-      rightSpeed = rightTarget;
-      leftSpeed = leftTarget;
-    }
-
-    //set motors
-    left1.move(leftSpeed);
-    left2.move(leftSpeed);
-    right1.move(rightSpeed);
-    right2.move(rightSpeed);
-    delay(20);
-  }
-}
-
-void enableSlew(bool enable){
-  slewEnabled = enable;
-}
-
-void initSlew(){
-  Task slewTask(slewController);
-}
 
 /**************************************************/
 //basic drive functions
 void left(int vel){
-  leftTarget = vel;
+  left1.move(vel);
+  left2.move(vel);
 }
 
 void right(int vel){
-  rightTarget = vel;
+  right1.move(vel);
+  right2.move(vel);
 }
 
 void reset(){
@@ -84,6 +35,43 @@ void reset(){
 int drivePos(){
   return (left1.get_position() + right1.get_position())/2;
 }
+
+/**************************************************/
+const int step = 14;
+
+
+//slew control
+void leftSlew(int leftTarget){
+  static int leftSpeed = 0;
+  
+  //left side
+  if(leftTarget > leftSpeed + step)
+    leftSpeed += step;
+  else if(leftTarget < leftSpeed - step)
+    leftSpeed -= step;
+  else
+    leftSpeed = leftTarget;
+
+  //set motors
+  left(leftSpeed);
+}
+
+//slew control
+void rightSlew(int rightTarget){
+  static int rightSpeed = 0;
+
+  //left side
+  if(rightTarget > rightSpeed + step)
+    rightSpeed += step;
+  else if(rightTarget < rightSpeed - step)
+    rightSpeed -= step;
+  else
+    rightSpeed = rightTarget;
+
+  //set motors
+  right(rightSpeed);
+}
+
 
 /**************************************************/
 //drive tasks
@@ -118,8 +106,8 @@ void driveTask(void* parameter){
       speed = -maxSpeed;
 
     //set motors
-    left(speed - slant);
-    right(speed + slant);
+    leftSlew(speed - slant);
+    rightSlew(speed + slant);
 
     delay(20);
   }
@@ -153,11 +141,8 @@ void turnTask(void* parameter){
     if(speed < -maxSpeed)
       speed = -maxSpeed;
 
-    left(-speed);
-    right(speed);
-
-    printf("sv: %f\n", sv);
-
+    leftSlew(-speed);
+    rightSlew(speed);
   }
 }
 
@@ -240,6 +225,4 @@ void driveOp(){
   int rJoy = master.get_analog(ANALOG_RIGHT_Y);
   left(lJoy);
   right(rJoy);
-
-  printf("gyro: %f\n", gyro.get_value());
 }
