@@ -10,6 +10,7 @@
 #include "intake.hpp"
 #include "launcher.hpp"
 #include "adjuster.hpp"
+#include "descore.hpp"
 
 using namespace pros;
 using namespace pros::literals;

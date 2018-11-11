@@ -6,6 +6,7 @@ void launcherOp();
 
 bool isFired();
 
+void initLauncherTask();
 void autoRatchet();
 void autoShoot();
 

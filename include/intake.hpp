@@ -6,6 +6,8 @@ void intake(int vel);
 bool hasBall();
 bool isLoaded();
 
+
+void initIntakeTask();
 void intakeBall();
 void loadBall();
 

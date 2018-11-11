@@ -51,25 +51,33 @@ void launcherOp(){
 }
 
 //tasks
-void autoRatchetTask(void* parameter){
-    launcher(127);
-    while(isFired()) delay(20);
-    launcher1.tare_position();
-    while(launcher1.get_position() < 50) delay(20);
-    launcher(0);
+static int launcherTarget = 0;
+
+void launcherTask(void* parameter){
+  while(1){
+    delay(20);
+
+    if(launcherTarget == 1){
+      launcher(127);
+      while(isFired()) delay(20);
+      launcher1.tare_position();
+      while(launcher1.get_position() < 50) delay(20);
+      launcher(0);
+      launcherTarget = 0;
+    }
+
+    if(launcherTarget == 2){
+      launcher(127);
+      while(!isFired()) delay(20);
+      launcherTarget = 1;
+    }
+  }
 }
 
 void autoRatchet(){
-  Task ratchetTask(autoRatchetTask);
-}
-
-
-void autoShootTask(void* parameter){
-  launcher(127);
-  while(!isFired()) delay(20);
-  autoRatchet();
+  launcherTarget = 1;
 }
 
 void autoShoot(){
-  Task shootTask(autoShootTask);
+  launcherTarget = 2;
 }

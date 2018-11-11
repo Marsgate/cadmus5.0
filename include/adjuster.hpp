@@ -3,7 +3,10 @@
 
 void adjuster(int vel);
 void adjusterOp();
+
 void autoAdjust(int direction);
+
+void adjustTask(void* parameter);
 void startAdjust(int direction);
 
 #endif

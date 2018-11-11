@@ -10,9 +10,8 @@ void adjuster(int vel){
 }
 
 void autoAdjust(int direction){
-  adjuster(127*direction);
+  d = direction;
   delay(300);
-  adjuster(0);
 }
 
 void adjusterOp(){
@@ -32,13 +31,21 @@ void adjusterOp(){
 }
 
 
-void autoAdjustTask(void* parameter){
-  adjuster(127*d);
-  delay(300);
-  adjuster(0);
+//tasks
+void adjustTask(void* parameter){
+  int lastDirection = d;
+  while(1){
+    delay(20);
+    if(lastDirection == d)
+      continue;
+
+    lastDirection = d;
+    adjuster(127*d);
+    delay(300);
+    adjuster(0);
+  }
 }
 
 void startAdjust(int direction){
   d = direction;
-  Task adjustTask(autoAdjustTask);
 }

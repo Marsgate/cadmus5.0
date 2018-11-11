@@ -97,6 +97,7 @@ void far(){
 void doubleShot(){
   //back up against wall
   startDrive(-2.1 TL);
+  printf("5");
   setSpeed(60);
   while(drivePos() > -.2 TL) delay(20);
   setSpeed(127);
@@ -118,9 +119,13 @@ void bigBoi(){
   intake(127);
   startDrive(3 TL);
   while(drivePos() < 1.5 TL) delay(20);
+  printf("1");
   setSpeed(60);
+  printf("2");
   intakeBall();
+  printf("3");
   while(drivePos() < 1.9 TL) delay(20);
+  printf("4");
 
   doubleShot();
 
@@ -175,16 +180,22 @@ void skills(){
 }
 
 void autonomous() {
-  Task drive_task (driveTask);
-  Task turn_task (turnTask);
+  Task drive_task(driveTask);
+  Task turn_task(turnTask);
+  Task adjust_task(autoAdjustTask);
+  Task intake_task(intakeTask);
+  Task launcher_task(launcherTask);
 
   if(auton.get_value()){
     bigBoi();
-    //autoTurn(90);
   }else{
     //skills();
   }
 
+
   drive_task.remove();
   turn_task.remove();
+  adjust_task.remove();
+  intake_task.remove();
+  launcher_task.remove();
 }

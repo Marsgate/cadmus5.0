@@ -39,11 +39,10 @@ int drivePos(){
 /**************************************************/
 const int step = 14;
 
-
 //slew control
 void leftSlew(int leftTarget){
   static int leftSpeed = 0;
-  
+
   //left side
   if(leftTarget > leftSpeed + step)
     leftSpeed += step;

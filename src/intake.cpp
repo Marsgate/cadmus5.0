@@ -42,22 +42,34 @@ void intakeOp(){
 
 
 //task
-void intakeBallTask(void* parameter){
-  intake(127);
-  while(!hasBall()) delay(20);
-  intake(0);
-}
+static int intakeTarget = 0;
 
-void loadBallTask(void* parameter){
-  intake(127);
-  while(!isLoaded()) delay(20);
-  intake(0);
+void intakeTask(void* parameter){
+  while(1){
+    delay(20);
+
+    printf("intakeTarget: %d\n", intakeTarget);
+
+    if(intakeTarget == 1){
+      intake(127);
+      while(!hasBall()) delay(20);
+      intake(0);
+      intakeTarget = 0;
+    }
+
+    if(intakeTarget == 2){
+      intake(127);
+      while(!isLoaded()) delay(20);
+      intake(0);
+      intakeTarget = 0;
+    }
+  }
 }
 
 void intakeBall(){
-  Task intakeTask(intakeBallTask);
+  intakeTarget = 1;
 }
 
 void loadBall(){
-  Task loadTask(loadBallTask);
+  intakeTarget = 2;
 }
