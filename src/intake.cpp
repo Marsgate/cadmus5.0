@@ -46,10 +46,6 @@ static int intakeTarget = 0;
 
 void intakeTask(void* parameter){
   while(1){
-    delay(20);
-
-    printf("intakeTarget: %d\n", intakeTarget);
-
     if(intakeTarget == 1){
       intake(127);
       while(!hasBall()) delay(20);
@@ -63,6 +59,8 @@ void intakeTask(void* parameter){
       intake(0);
       intakeTarget = 0;
     }
+    
+    delay(20);
   }
 }
 

@@ -9,11 +9,6 @@ void adjuster(int vel){
   adjuster1.move(vel);
 }
 
-void autoAdjust(int direction){
-  d = direction;
-  delay(300);
-}
-
 void adjusterOp(){
   static int vel = 0;
   static int t = 0;
@@ -35,17 +30,20 @@ void adjusterOp(){
 void adjustTask(void* parameter){
   int lastDirection = d;
   while(1){
+    if(lastDirection != d){
+      lastDirection = d;
+      adjuster(127*d);
+      delay(300);
+      adjuster(0);
+    }
     delay(20);
-    if(lastDirection == d)
-      continue;
-
-    lastDirection = d;
-    adjuster(127*d);
-    delay(300);
-    adjuster(0);
   }
 }
 
 void startAdjust(int direction){
   d = direction;
+}
+void autoAdjust(int direction){
+  startAdjust();
+  delay(300);
 }

@@ -55,8 +55,6 @@ static int launcherTarget = 0;
 
 void launcherTask(void* parameter){
   while(1){
-    delay(20);
-
     if(launcherTarget == 1){
       launcher(127);
       while(isFired()) delay(20);
@@ -71,6 +69,8 @@ void launcherTask(void* parameter){
       while(!isFired()) delay(20);
       launcherTarget = 1;
     }
+    
+    delay(20);
   }
 }
 
