@@ -10,7 +10,7 @@ void opcontrol() {
 		adjusterOp();
     descoreOp();
 
-		if(master.get_digital(DIGITAL_LEFT))
+		if(master.get_digital(DIGITAL_LEFT) && !competition::is_connected())
 			autonomous();
 
 		delay(10);

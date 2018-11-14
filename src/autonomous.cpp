@@ -10,26 +10,24 @@ static int park = false;
 
 void close(){
   //launch the ball
-  launcher(127);
-  while(!isFired()) delay(20);
-  autoRatchet();
-  intake(0);
+  shoot();
+  ratchetAsync();
 
   //toggle the low flag
-  autoTurn(6);
-  loadBall();
-  autoDrive(2.3 TL);
+  turn(6);
+  loadBallAsync();
+  drive(2.3 TL);
 
   //backup to align with next cap
-  autoDrive(-1.3 TL);
+  drive(-1.3 TL);
 
   //line up with the wall
-  autoTurn(-90);
-  autoDrive(-.4 TL);
+  turn(-90);
+  drive(-.4 TL);
 
   //flip next cap
   intake(-80);
-  startDrive(1.5 TL);
+  driveAsync(1.5 TL);
   while(drivePos() < .3 TL) delay(20);
   setSpeed(40);
   while(drivePos() < .6 TL) delay(20);
@@ -42,34 +40,33 @@ void close(){
     return;
 
   //align with platform
-  autoTurn(-80);
-  autoDrive(1.5 TL);
+  turn(-80);
+  drive(1.5 TL);
 
   //alliance park
-  startDrive(2 TL);
+  driveAsync(2 TL);
   while(drivePos() < .9 TL) delay(20);
-  autoDrive(-1);
+  drive(-1);
 }
 
 void far(){
   //launch the ball
-  launcher(127);
-  while(!isFired()) delay(20);
-  autoRatchet();
+  shoot();
+  ratchetAsync();
 
   //align with wall
-  autoDrive(-1.3 TL);
+  drive(-1.3 TL);
 
   //face cap
-  autoDrive(.25 TL);
-  autoTurn(-90);
+  drive(.25 TL);
+  turn(-90);
 
   //align against the wall
-  autoDrive(-.5 TL);
+  drive(-.5 TL);
 
   //flip cap
   intake(-127);
-  startDrive(3.4 TL);
+  driveAsync(3.4 TL);
   while(drivePos() < .9 TL) delay(20);
   setSpeed(60);
   while(drivePos() < 2.1 TL) delay(20);
@@ -77,65 +74,59 @@ void far(){
   while(drivePos() < 2.3 TL) delay(20);
 
   //face platform
-  autoDrive(-.6 TL);
+  drive(-.6 TL);
   intake(0);
-  autoTurn(84);
+  turn(84);
 
   //drive to platform
-  autoDrive(1.4 TL);
+  drive(1.4 TL);
 
   // if auto is not a parking auton, exit
   if(!park)
     return;
 
   //alliance park
-  startDrive(2 TL);
+  driveAsync(2 TL);
   while(drivePos() < .9 TL) delay(20);
-  autoDrive(-1);
+  drive(-1);
 }
 
 void doubleShot(){
   //back up against wall
-  startDrive(-2.1 TL);
-  printf("5");
+  drive(-2.1 TL);
   setSpeed(60);
   while(drivePos() > -.2 TL) delay(20);
   setSpeed(127);
   while(isDriving()) delay(20);
 
   //align with flags
-  autoDrive(.35 TL);
-  autoTurn(89);
+  drive(.35 TL);
+  turn(89);
 
   //launch the balls
-  launcher(127);
-  while(!isFired()) delay(20);
+  shoot();
   intake(127);
-  autoAdjust(1);
+  adjust();
 }
 
 void bigBoi(){
   //flip the nearest cap
   intake(127);
-  startDrive(3 TL);
+  driveAsync(3 TL);
   while(drivePos() < 1.5 TL) delay(20);
-  printf("1");
   setSpeed(60);
-  printf("2");
-  intakeBall();
-  printf("3");
+  intakeBallAsync();
   while(drivePos() < 1.9 TL) delay(20);
-  printf("4");
 
   doubleShot();
 
   close();
 
   //align with flags in the center
-  startAdjust(-1);
-  autoTurn(45);
-  autoShoot();
-  startDrive(1.8 TL);
+  adjustAsync();
+  turn(45);
+  shootAsync();
+  driveAsync(1.8 TL);
   setSlant(40);
   delay(1500);
 }
@@ -143,13 +134,13 @@ void bigBoi(){
 void skills(){
   //flip the nearest cap
   intake(-60);
-  startDrive(3 TL);
+  driveAsync(3 TL);
   while(drivePos() < 1.5 TL) delay(20);
   setSpeed(60);
   while(drivePos() < 1.9 TL) delay(20);
-  intakeBall();
+  intakeBallAsync();
   while(drivePos() < 2.2 TL) delay(20);
-  startDrive(-1 TL);
+  driveAsync(-1 TL);
   while(drivePos() > -.5 TL) delay(20);
 
 
@@ -158,44 +149,31 @@ void skills(){
   close();
 
   //align against wall
-  autoDrive(-1.6 TL);
-  autoDrive(.4 TL);
+  drive(-1.6 TL);
+  drive(.4 TL);
 
   //align for park
-  autoTurn(-90);
-  autoDrive(2.15 TL);
-  autoTurn(90);
-  autoDrive(.7 TL);
+  turn(-90);
+  drive(2.15 TL);
+  turn(90);
+  drive(.7 TL);
 
   //alliance park
-  startDrive(2 TL);
+  driveAsync(2 TL);
   while(drivePos() < .9 TL) delay(20);
-  autoDrive(-1);
+  drive(-1);
 
   //center park
-  autoDrive(.3 TL);
-  startDrive(2 TL);
+  drive(.3 TL);
+  driveAsync(2 TL);
   while(drivePos() < .9 TL) delay(20);
-  autoDrive(-1);
+  drive(-1);
 }
 
 void autonomous() {
-  Task drive_task(driveTask);
-  Task turn_task(turnTask);
-  Task adjust_task(autoAdjustTask);
-  Task intake_task(intakeTask);
-  Task launcher_task(launcherTask);
-
   if(auton.get_value()){
     bigBoi();
   }else{
-    //skills();
+    skills();
   }
-
-
-  drive_task.remove();
-  turn_task.remove();
-  adjust_task.remove();
-  intake_task.remove();
-  launcher_task.remove();
 }

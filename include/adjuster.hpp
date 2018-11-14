@@ -1,12 +1,11 @@
 #ifndef _ADJUSTER_H_
 #define _ADJUSTER_H_
 
-void adjuster(int vel);
-void adjusterOp();
-
-void autoAdjust(int direction);
+void adjustAsync();
+void adjust();
 
 void adjustTask(void* parameter);
-void startAdjust(int direction);
+
+void adjusterOp();
 
 #endif

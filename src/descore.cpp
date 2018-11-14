@@ -1,12 +1,16 @@
 #include "main.h"
 
-//motors
+
 Motor descore1(6, 1);
 
+/**************************************************/
+//basic control
 void descore(int vel){
   descore1.move(vel);
 }
 
+/**************************************************/
+//operator control
 void descoreOp(){
   static int vel;
 

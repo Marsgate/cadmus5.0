@@ -6,10 +6,12 @@ void intake(int vel);
 bool hasBall();
 bool isLoaded();
 
-
-void initIntakeTask();
+void intakeBallAsync();
+void loadBallAsync();
 void intakeBall();
 void loadBall();
+
+void intakeTask(void* parameter);
 
 void intakeOp();
 

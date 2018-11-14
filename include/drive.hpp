@@ -8,10 +8,10 @@ bool isDriving();
 void driveTask(void* parameter);
 void turnTask(void* parameter);
 
-void startDrive(int sp);
-void startTurn(int sp);
-void autoDrive(int sp);
-void autoTurn(int sp);
+void driveAsync(int sp);
+void turnAsync(int sp);
+void drive(int sp);
+void turn(int sp);
 
 void setSpeed(int speed);
 void setSlant(int s);

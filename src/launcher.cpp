@@ -1,15 +1,21 @@
 #include "main.h"
 
+static int launcherTarget = 0;
+
 //motors
 Motor launcher1(4, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
 
 //line sensors
 ADIAnalogIn line('D');
 
+/**************************************************/
+//basic control
 void launcher(int vel){
   launcher1.move(vel);
 }
 
+/**************************************************/
+//feedback
 bool isFired(){
   if(line.get_value() < 2000)
     return true;
@@ -17,6 +23,50 @@ bool isFired(){
     return false;
 }
 
+/**************************************************/
+//autonomous control
+void shootAsync(){
+  launcherTarget = 1;
+}
+
+void ratchetAsync(){
+  launcherTarget = 1;
+}
+
+void shoot(){
+  launcher(127);
+  while(!isFired()) delay(20);
+}
+
+void ratchet(){
+  launcher(127);
+  while(isFired()) delay(20);
+  launcher1.tare_position();
+  while(launcher1.get_position() < 50) delay(20);
+  launcher(0);
+}
+
+/**************************************************/
+//task control
+void launcherTask(void* parameter){
+  while(1){
+
+    switch(launcherTarget){
+      case 1:
+        shoot();
+        break;
+      case 2:
+        ratchet();
+        break;
+    }
+
+    launcherTarget = 0;
+    delay(20);
+  }
+}
+
+/**************************************************/
+//operator control
 void launcherOp(){
   static int vel = 0;
   static int ready = true;
@@ -48,36 +98,4 @@ void launcherOp(){
   if(!ready)
     vel = 127;
 
-}
-
-//tasks
-static int launcherTarget = 0;
-
-void launcherTask(void* parameter){
-  while(1){
-    if(launcherTarget == 1){
-      launcher(127);
-      while(isFired()) delay(20);
-      launcher1.tare_position();
-      while(launcher1.get_position() < 50) delay(20);
-      launcher(0);
-      launcherTarget = 0;
-    }
-
-    if(launcherTarget == 2){
-      launcher(127);
-      while(!isFired()) delay(20);
-      launcherTarget = 1;
-    }
-    
-    delay(20);
-  }
-}
-
-void autoRatchet(){
-  launcherTarget = 1;
-}
-
-void autoShoot(){
-  launcherTarget = 2;
 }
