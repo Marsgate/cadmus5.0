@@ -30,19 +30,20 @@ void shootAsync(){
 }
 
 void ratchetAsync(){
-  launcherTarget = 1;
+  launcherTarget = 2;
 }
 
 void shoot(){
   launcher(127);
   while(!isFired()) delay(20);
+  launcher(0);
 }
 
 void ratchet(){
   launcher(127);
   while(isFired()) delay(20);
   launcher1.tare_position();
-  while(launcher1.get_position() < 50) delay(20);
+  while(launcher1.get_position() < 150) delay(20);
   launcher(0);
 }
 
@@ -50,6 +51,10 @@ void ratchet(){
 //task control
 void launcherTask(void* parameter){
   while(1){
+    delay(20);
+    
+    if(!autonMode)
+      continue;
 
     switch(launcherTarget){
       case 1:
@@ -61,7 +66,6 @@ void launcherTask(void* parameter){
     }
 
     launcherTarget = 0;
-    delay(20);
   }
 }
 

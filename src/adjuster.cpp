@@ -29,6 +29,10 @@ void adjust(){
 //task control
 void adjustTask(void* parameter){
   while(1){
+    delay(20);
+    
+    if(!autonMode)
+      continue;
 
     switch(adjusterTarget){
       case 1:
@@ -37,7 +41,6 @@ void adjustTask(void* parameter){
     }
 
     adjusterTarget = 0;
-    delay(20);
   }
 }
 

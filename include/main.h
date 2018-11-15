@@ -17,6 +17,8 @@ using namespace pros::literals;
 
 extern Controller master;
 
+extern bool autonMode;
+
 #ifdef __cplusplus
 extern "C" {
 #endif

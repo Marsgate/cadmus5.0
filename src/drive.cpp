@@ -152,6 +152,9 @@ void driveTask(void* parameter){
   while(1){
     delay(20);
 
+    if(!autonMode)
+      continue;
+
     if(!driveMode)
       continue;
 
@@ -180,8 +183,6 @@ void driveTask(void* parameter){
     //set motors
     leftSlew(speed - slant);
     rightSlew(speed + slant);
-
-    delay(20);
   }
 }
 
@@ -190,6 +191,9 @@ void turnTask(void* parameter){
 
   while(1){
     delay(20);
+
+    if(autonMode)
+      continue;
 
     if(driveMode)
       continue;
@@ -215,7 +219,7 @@ void turnTask(void* parameter){
 
     leftSlew(-speed);
     rightSlew(speed);
-  }
+    }
 }
 
 /**************************************************/

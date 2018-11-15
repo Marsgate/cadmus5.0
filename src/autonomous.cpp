@@ -14,7 +14,7 @@ void close(){
   ratchetAsync();
 
   //toggle the low flag
-  turn(6);
+  turn(4);
   loadBallAsync();
   drive(2.3 TL);
 
@@ -100,8 +100,8 @@ void doubleShot(){
   while(isDriving()) delay(20);
 
   //align with flags
-  drive(.35 TL);
-  turn(89);
+  drive(.25 TL);
+  turn(84);
 
   //launch the balls
   shoot();
@@ -124,10 +124,13 @@ void bigBoi(){
 
   //align with flags in the center
   adjustAsync();
-  turn(45);
-  shootAsync();
+  turn(40);
+
+  //drive and shoot
   driveAsync(1.8 TL);
-  setSlant(40);
+  setSlant(45);
+  delay(300);
+  shootAsync();
   delay(1500);
 }
 
@@ -171,6 +174,8 @@ void skills(){
 }
 
 void autonomous() {
+  autonMode = true;
+
   if(auton.get_value()){
     bigBoi();
   }else{

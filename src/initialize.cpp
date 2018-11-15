@@ -1,6 +1,8 @@
 #include "main.h"
 
-void initialize(){
+bool autonMode = false;
+
+void initialize() {
   Task drive_task(driveTask);
   Task turn_task(turnTask);
   Task adjust_task(adjustTask);

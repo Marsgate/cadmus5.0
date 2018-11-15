@@ -58,6 +58,10 @@ void loadBall(){
 //task control
 void intakeTask(void* parameter){
   while(1){
+    delay(20);
+
+    if(!autonMode)
+      continue;
 
     switch(intakeTarget){
       case 1:
@@ -69,7 +73,6 @@ void intakeTask(void* parameter){
     }
 
     intakeTarget = 0;
-    delay(20);
   }
 }
 
