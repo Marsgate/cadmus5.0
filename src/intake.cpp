@@ -60,9 +60,6 @@ void intakeTask(void* parameter){
   while(1){
     delay(20);
 
-    if(!autonMode)
-      continue;
-
     switch(intakeTarget){
       case 1:
         intakeBall();

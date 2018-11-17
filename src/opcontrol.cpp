@@ -3,8 +3,6 @@
 Controller master(CONTROLLER_MASTER);
 
 void opcontrol() {
-  autonMode = false;
-
 	while (true){
 		driveOp();
 		intakeOp();

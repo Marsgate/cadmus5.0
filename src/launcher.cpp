@@ -43,7 +43,7 @@ void ratchet(){
   launcher(127);
   while(isFired()) delay(20);
   launcher1.tare_position();
-  while(launcher1.get_position() < 150) delay(20);
+  while(launcher1.get_position() < 70) delay(20);
   launcher(0);
 }
 
@@ -52,9 +52,6 @@ void ratchet(){
 void launcherTask(void* parameter){
   while(1){
     delay(20);
-    
-    if(!autonMode)
-      continue;
 
     switch(launcherTarget){
       case 1:

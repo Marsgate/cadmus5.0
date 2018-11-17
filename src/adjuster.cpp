@@ -30,9 +30,6 @@ void adjust(){
 void adjustTask(void* parameter){
   while(1){
     delay(20);
-    
-    if(!autonMode)
-      continue;
 
     switch(adjusterTarget){
       case 1:
@@ -58,6 +55,5 @@ void adjusterOp(){
   if(master.get_digital_new_press(DIGITAL_L2))
     d = -d, vel = 127*d, t = 0;
   else if(t > 15)
-    adjuster(0);
-
+    vel = 0;
 }

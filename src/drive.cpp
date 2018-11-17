@@ -28,6 +28,10 @@ void right(int vel){
 }
 
 void reset(){
+  maxSpeed = 127;
+  slant = 0;
+  driveTarget = 0;
+  turnTarget = 0;
   left1.tare_position();
   right1.tare_position();
 }
@@ -109,15 +113,12 @@ bool isDriving(){
 /**************************************************/
 //autonomous functions
 void driveAsync(int sp){
-  maxSpeed = 127;
-  slant = 0;
   reset();
   driveTarget = sp;
   driveMode = true;
 }
 
 void turnAsync(int sp){
-  maxSpeed = 127;
   reset();
   turnTarget = sp;
   driveMode = false;
@@ -142,6 +143,10 @@ void setSpeed(int speed){
 void setSlant(int s){
   if(!mirror.get_value())
     s = -s;
+
+  if(s < 0)
+    s += 5;
+
   slant = s;
 }
 
@@ -151,9 +156,6 @@ void driveTask(void* parameter){
   int prevError = 0;
   while(1){
     delay(20);
-
-    if(!autonMode)
-      continue;
 
     if(!driveMode)
       continue;
@@ -192,16 +194,16 @@ void turnTask(void* parameter){
   while(1){
     delay(20);
 
-    if(autonMode)
-      continue;
-
     if(driveMode)
       continue;
 
     int sp = turnTarget * 3.6;
 
-    if(!mirror.get_value())
+    if(!mirror.get_value()){
       sp = -sp; // inverted turn speed for blue auton
+      if(sp < 0)
+        sp -= 3; // turn compensation for the blue side
+    }
 
     double kp = .7;
     double kd = 3;
