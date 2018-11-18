@@ -14,7 +14,7 @@ void close(){
   ratchetAsync();
 
   //toggle the low flag
-  turn(4);
+  turn(6);
   loadBallAsync();
   drive(2.3 TL);
 
@@ -127,7 +127,6 @@ void bigBoi(){
 
   drive(-.3 TL);
 
-
   //align with flags in the center
   adjustAsync();
   turn(34);
@@ -137,9 +136,9 @@ void bigBoi(){
   setSlant(45);
   delay(100);
   shootAsync();
-  delay(500);
+  delay(800);
   setSlant(0);
-  delay(1000);
+  delay(800);
   reset();
 }
 
@@ -160,13 +159,20 @@ void skills(){
 
   close();
 
+  drive(-.3 TL);
+
+  //align with flags in the center
+  turn(45);
+  shoot();
+  turn(-45);
+
   //align against wall
   drive(-1.6 TL);
   drive(.4 TL);
 
   //align for park
   turn(-90);
-  drive(2.15 TL);
+  drive(2.2 TL);
   turn(90);
   drive(.7 TL);
 
