@@ -3,10 +3,10 @@
 static int launcherTarget = 0;
 
 //motors
-Motor launcher1(4, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
+Motor launcher1(14, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
 
 //line sensors
-ADIAnalogIn line('D');
+ADIAnalogIn line('E');
 
 /**************************************************/
 //basic control

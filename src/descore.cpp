@@ -1,7 +1,7 @@
 #include "main.h"
 
 
-Motor descore1(6, 1);
+Motor descore1(16, 1);
 
 /**************************************************/
 //basic control

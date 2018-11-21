@@ -4,7 +4,7 @@ static int adjusterTarget = 0;
 static int d = -1;
 
 //motors
-Motor adjuster1(5, MOTOR_GEARSET_6, 1);
+Motor adjuster1(15, MOTOR_GEARSET_6, 1);
 
 /**************************************************/
 //basic control

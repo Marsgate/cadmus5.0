@@ -4,7 +4,7 @@
 #define TL *644
 
 //jumpers
-ADIDigitalIn auton('G');
+ADIDigitalIn auton('B');
 
 static int park = false;
 

@@ -3,12 +3,13 @@
 static int intakeTarget = 0;
 
 //motors
-Motor intake1(3, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
+Motor intake1(13, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
 
 //line sensors
-ADILineSensor line_L('A');
-ADILineSensor line_I('B');
-ADILineSensor line_R('C');
+ADILineSensor line_L('F');
+ADILineSensor line_R('G');
+ADILineSensor line_I('H');
+
 
 /**************************************************/
 //basic control

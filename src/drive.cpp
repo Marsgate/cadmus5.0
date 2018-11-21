@@ -7,13 +7,13 @@ static int maxSpeed = 127;
 static int slant = 0;
 
 //motors
-Motor left1(10, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
-Motor left2(9, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
-Motor right1(2, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
-Motor right2(1, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
+Motor left1(20, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
+Motor left2(19, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
+Motor right1(12, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
+Motor right2(11, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 
 //sensors
-ADIDigitalIn mirror('H');
+ADIDigitalIn mirror('A');
 
 /**************************************************/
 //basic control
