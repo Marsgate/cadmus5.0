@@ -3,9 +3,12 @@
 
 Motor descore1(16, 1);
 
+
+
 /**************************************************/
 //basic control
 void descore(int vel){
+  descore1.set_brake_mode(MOTOR_BRAKE_HOLD);
   descore1.move(vel);
 }
 
