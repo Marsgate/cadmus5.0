@@ -8,7 +8,7 @@ void opcontrol() {
 		intakeOp();
 		launcherOp();
 		adjusterOp();
-    descoreOp();
+    liftOp();
 
 		if(master.get_digital(DIGITAL_LEFT) && !competition::is_connected())
 			autonomous();

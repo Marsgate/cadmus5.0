@@ -1,10 +1,13 @@
 #include "main.h"
 
+#define MAX 120;
+
 static bool driveMode = true;
 static int driveTarget = 0;
 static int turnTarget = 0;
-static int maxSpeed = 127;
+static int maxSpeed = MAX;
 static int slant = 0;
+
 
 //motors
 Motor left1(20, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
@@ -28,12 +31,14 @@ void right(int vel){
 }
 
 void reset(){
-  maxSpeed = 127;
+  maxSpeed = MAX;
   slant = 0;
   driveTarget = 0;
   turnTarget = 0;
   left1.tare_position();
+  left2.tare_position();
   right1.tare_position();
+  right2.tare_position();
 }
 
 int drivePos(){
@@ -42,12 +47,18 @@ int drivePos(){
 
 /**************************************************/
 //slew control
-const int step = 14;
+const int accel_step = 7;
+const int deccel_step = 14;
 
 void leftSlew(int leftTarget){
   static int leftSpeed = 0;
+  int step;
 
-  //left side
+  if(leftSpeed < leftTarget && driveMode)
+    step = accel_step;
+  else
+    step = deccel_step;
+
   if(leftTarget > leftSpeed + step)
     leftSpeed += step;
   else if(leftTarget < leftSpeed - step)
@@ -62,8 +73,13 @@ void leftSlew(int leftTarget){
 //slew control
 void rightSlew(int rightTarget){
   static int rightSpeed = 0;
+  int step;
 
-  //left side
+  if(rightSpeed < rightTarget && driveMode)
+    step = accel_step;
+  else
+    step = deccel_step;
+
   if(rightTarget > rightSpeed + step)
     rightSpeed += step;
   else if(rightTarget < rightSpeed - step)
@@ -82,7 +98,7 @@ bool isDriving(){
   static int last = 0;
   static int lastTarget = 0;
 
-  int curr = left1.get_position();
+  int curr = right1.get_position();
   int thresh = 3;
   int target = turnTarget;
 
@@ -154,6 +170,7 @@ void setSlant(int s){
 //task control
 void driveTask(void* parameter){
   int prevError = 0;
+
   while(1){
     delay(20);
 
@@ -168,7 +185,6 @@ void driveTask(void* parameter){
     //read sensors
     int ls = left1.get_position();
     int rs = right1.get_position();
-    //int sv = (ls+rs)/2;
     int sv = ls;
 
     //speed
@@ -197,16 +213,20 @@ void turnTask(void* parameter){
     if(driveMode)
       continue;
 
-    int sp = turnTarget * 3.6;
+    int sp = turnTarget;
 
-    if(!mirror.get_value()){
+
+
+    if(!mirror.get_value())
       sp = -sp; // inverted turn speed for blue auton
-      if(sp < 0)
-        sp -= 3; // turn compensation for the blue side
-    }
 
-    double kp = .7;
-    double kd = 3;
+    if(sp > 0)
+      sp *= 2.97;
+    else
+      sp *= 3.15;
+
+    double kp = .9;
+    double kd = 3.5;
 
     int sv = (right1.get_position() - left1.get_position())/2;
     int error = sp-sv;
