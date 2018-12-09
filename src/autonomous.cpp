@@ -125,11 +125,11 @@ void skills(){
   //align with flags
   drive(.3 TL);
   turn(87);
-  drive(2 TL);
+  drive(1.9 TL);
   turn(-90);
   drive(-.5 TL);
-  drive(.35 TL);
-  turn(90);
+  drive(.28 TL);
+  turn(88);
 
   //shoot both flags
   shoot();
@@ -141,6 +141,7 @@ void skills(){
   ratchetAsync();
 
   //toggle the low flag
+  turn(3);
   loadBallAsync();
   drive(2.3 TL);
 
@@ -156,9 +157,9 @@ void skills(){
   driveAsync(3 TL);
   while(drivePos() < 1.7 TL) delay(20);
   setSpeed(60);
-  while(drivePos() < 2 TL) delay(20);
+  while(drivePos() < 2.05 TL) delay(20);
   intakeBallAsync();
-  while(drivePos() < 2.1 TL) delay(20);
+  while(drivePos() < 2.18 TL) delay(20);
   driveAsync(-.1 TL);
   while(isDriving()) delay(20);
 

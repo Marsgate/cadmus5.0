@@ -1,6 +1,6 @@
 #include "main.h"
 
-#define MAX 120;
+#define MAX 127;
 
 static bool driveMode = true;
 static int driveTarget = 0;
@@ -47,7 +47,7 @@ int drivePos(){
 
 /**************************************************/
 //slew control
-const int accel_step = 7;
+const int accel_step = 11;
 const int deccel_step = 14;
 
 void leftSlew(int leftTarget){
