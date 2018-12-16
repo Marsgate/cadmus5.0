@@ -9,6 +9,7 @@ Motor adjuster1(15, MOTOR_GEARSET_6, 1);
 /**************************************************/
 //basic control
 void adjuster(int vel){
+  adjuster1.set_brake_mode(MOTOR_BRAKE_BRAKE);
   adjuster1.move(vel);
 }
 

@@ -5,6 +5,7 @@
 
 //jumpers
 ADIDigitalIn auton('B');
+ADIDigitalIn mirror('A');
 
 static int park = false;
 
@@ -14,21 +15,30 @@ void close(){
   ratchetAsync();
 
   //toggle the low flag
+  if(!mirror.get_value())
+    turn(3);
+  else
+    turn(6);
   loadBallAsync();
-  drive(2.3 TL);
+  driveAsync(2.2 TL);
+  while(drivePos() < 1.8 TL) delay(20);
+  setSpeed(40);
+  while(isDriving() ) delay(20);
 
   //backup to align with next cap
-  drive(-1 TL);
+  drive(-1.1 TL);
 
   //line up with the wall
   turn(-90);
-  drive(-.4 TL);
+  drive(-.5 TL);
 
   //flip next cap
   intake(-80);
-  driveAsync(1.6 TL);
-  while(drivePos() < .5 TL) delay(20);
-  setSpeed(60);
+  driveAsync(1.5 TL);
+  while(drivePos() < .45 TL) delay(20);
+  setSpeed(50);
+  while(drivePos() < .9 TL) delay(20);
+  setSpeed(80);
   while(isDriving()) delay(20);
   intake(0);
 
@@ -61,16 +71,10 @@ void bigBoi(){
 
   //back up against wall
   drive(-2 TL);
-  setSpeed(60);
-  while(drivePos() > -.2 TL) delay(20);
-  setSpeed(127);
-  while(drivePos() > -1.6 TL) delay(20);
-  setSpeed(60);
-  while(isDriving()) delay(20);
 
   //align with flags
-  drive(.3 TL);
-  turn(90);
+  drive(.25 TL);
+  turn(87);
 
   //launch the balls
   shoot();
@@ -81,22 +85,20 @@ void bigBoi(){
 
   close();
 
-  drive(-.3 TL);
+  drive(-.2 TL);
 
   //align with flags in the center
   adjustAsync();
   turn(34);
 
   //drive and shoot
-  driveAsync(2 TL);
-  setSlant(40);
-  delay(250);
-  shootAsync();
-  delay(700);
+  driveAsync(2.2 TL);
+  setSlant(50);
+  delay(400);
+  shoot();
   ratchetAsync();
+  delay(300);
   setSlant(0);
-  delay(800);
-  reset();
 }
 
 void skills(){
@@ -115,12 +117,6 @@ void skills(){
 
   //back up against wall
   drive(-2 TL);
-  setSpeed(60);
-  while(drivePos() > -.2 TL) delay(20);
-  setSpeed(127);
-  while(drivePos() > -1.6 TL) delay(20);
-  setSpeed(60);
-  while(isDriving()) delay(20);
 
   //align with flags
   drive(.3 TL);
@@ -128,7 +124,7 @@ void skills(){
   drive(1.9 TL);
   turn(-90);
   drive(-.5 TL);
-  drive(.28 TL);
+  drive(.25 TL);
   turn(88);
 
   //shoot both flags
@@ -143,7 +139,10 @@ void skills(){
   //toggle the low flag
   turn(3);
   loadBallAsync();
-  drive(2.3 TL);
+  driveAsync(2.2 TL);
+  while(drivePos() < 1.8 TL) delay(20);
+  setSpeed(40);
+  while(isDriving() ) delay(20);
 
   //backup to align with next cap
   drive(-2 TL);
@@ -198,14 +197,14 @@ void skills(){
   drive(-1.5 TL);
   drive(.3 TL);
   adjustAsync();
-  turn(-54);
+  turn(-56);
 
   //shoot flag
   shoot();
   ratchetAsync();
 
   //line up for park
-  turn(54);
+  turn(56);
   drive(-.5 TL);
   drive(.3 TL);
   turn(90);
@@ -213,9 +212,9 @@ void skills(){
   drive(1.8 TL);
   drive(-.3 TL);
   turn(90);
-  drive(1 TL);
+  drive(1.2 TL);
   turn(90);
-  drive(-.5 TL);
+  drive(-.6 TL);
   drive(1.1 TL);
 
   /*

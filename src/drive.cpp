@@ -15,9 +15,6 @@ Motor left2(19, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
 Motor right1(12, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 Motor right2(11, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 
-//sensors
-ADIDigitalIn mirror('A');
-
 /**************************************************/
 //basic control
 void left(int vel){
@@ -47,14 +44,14 @@ int drivePos(){
 
 /**************************************************/
 //slew control
-const int accel_step = 11;
-const int deccel_step = 14;
+const int accel_step = 8;
+const int deccel_step = 256;
 
 void leftSlew(int leftTarget){
   static int leftSpeed = 0;
   int step;
 
-  if(leftSpeed < leftTarget && driveMode)
+  if(abs(leftSpeed) < abs(leftTarget))
     step = accel_step;
   else
     step = deccel_step;
@@ -75,7 +72,7 @@ void rightSlew(int rightTarget){
   static int rightSpeed = 0;
   int step;
 
-  if(rightSpeed < rightTarget && driveMode)
+  if(abs(rightSpeed) < abs(rightTarget))
     step = accel_step;
   else
     step = deccel_step;
@@ -221,9 +218,9 @@ void turnTask(void* parameter){
       sp = -sp; // inverted turn speed for blue auton
 
     if(sp > 0)
-      sp *= 2.97;
+      sp *= 3.1;
     else
-      sp *= 3.15;
+      sp *= 3.05;
 
     double kp = .9;
     double kd = 3.5;
