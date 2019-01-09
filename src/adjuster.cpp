@@ -22,7 +22,7 @@ void adjustAsync(){
 void adjust(){
   d = -d;
   adjuster(127*d);
-  delay(300);
+  delay(400);
   adjuster(0);
 }
 
@@ -48,13 +48,13 @@ void adjusterOp(){
   static int vel = 0;
   static int t = 0;
 
-  if(t <= 15)
+  if(t <= 20)
     t++;
 
   adjuster(vel);
 
   if(master.get_digital_new_press(DIGITAL_L2))
     d = -d, vel = 127*d, t = 0;
-  else if(t > 15)
+  else if(t > 20)
     vel = 0;
 }

@@ -1,32 +1,49 @@
 #include "main.h"
 
 //definition of a tile in encoder ticks
-#define TL *680
+#define TL *545
 
 //jumpers
 ADIDigitalIn auton('B');
 ADIDigitalIn mirror('A');
 
-static int park = false;
 
-void close(){
-  //launch the ball
+/*********************************************************/
+void bigBoi(){
+  //intake ball under the nearest cap
+  intake(127);
+  driveAsync(3 TL);
+  while(drivePos() < 1.5 TL) delay(20);
+  setSpeed(60);
+  intakeBallAsync();
+  while(drivePos() < 1.9 TL) delay(20);
+
+  //back up against wall
+  drive(-2 TL);
+
+  //align with flags
+  drive(.25 TL);
+  turn(83);
+
+  //launch the balls
+  shoot();
+  ratchetAsync();
+  intake(127);
+  adjust();
+  while(!isLoaded()) delay(20);
   shoot();
   ratchetAsync();
 
-  //toggle the low flag
-  if(!mirror.get_value())
-    turn(3);
-  else
-    turn(6);
+  //toggle low flag
+  turn(11);
   loadBallAsync();
-  driveAsync(2.2 TL);
-  while(drivePos() < 1.8 TL) delay(20);
-  setSpeed(40);
-  while(isDriving() ) delay(20);
+  driveAsync(2.1 TL);
+  while(drivePos() < 1.7 TL) delay(20);
+  setSpeed(38);
+  while(isDriving()) delay(20);
 
   //backup to align with next cap
-  drive(-1.1 TL);
+  drive(-1 TL);
 
   //line up with the wall
   turn(-90);
@@ -42,65 +59,26 @@ void close(){
   while(isDriving()) delay(20);
   intake(0);
 
-  // if auto is not a parking auton, exit
-  if(!park)
-    return;
-
-  //align with platform
-  turn(-80);
-  drive(1.5 TL);
-
-  //alliance park
-  driveAsync(2 TL);
-  while(drivePos() < .9 TL) delay(20);
-  drive(-1);
-}
-
-void far(){
-  //needs reprogrammed
-}
-
-void bigBoi(){
-  //intake ball under the nearest cap
-  intake(127);
-  driveAsync(3 TL);
-  while(drivePos() < 1.5 TL) delay(20);
-  setSpeed(60);
-  intakeBallAsync();
-  while(drivePos() < 1.9 TL) delay(20);
-
-  //back up against wall
-  drive(-2 TL);
-
-  //align with flags
-  drive(.25 TL);
-  turn(87);
-
-  //launch the balls
-  shoot();
-  ratchetAsync();
-  intake(127);
-  adjust();
-  while(!isLoaded()) delay(20);
-
-  close();
-
   drive(-.2 TL);
 
   //align with flags in the center
   adjustAsync();
-  turn(34);
+  turn(40);
 
   //drive and shoot
-  driveAsync(2.2 TL);
-  setSlant(50);
-  delay(400);
+  driveAsync(1.8 TL);
+  setSlant(53);
+  delay(300);
   shoot();
   ratchetAsync();
-  delay(300);
   setSlant(0);
+  while(isDriving()) delay(20);
+  drive(-.4 TL);
 }
 
+
+
+/*********************************************************/
 void skills(){
   //intake ball and flip cap
   intake(-60);

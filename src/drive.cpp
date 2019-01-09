@@ -217,10 +217,11 @@ void turnTask(void* parameter){
     if(!mirror.get_value())
       sp = -sp; // inverted turn speed for blue auton
 
+
     if(sp > 0)
-      sp *= 3.1;
+      sp *= 2.48;
     else
-      sp *= 3.05;
+      sp *= 2.55;
 
     double kp = .9;
     double kd = 3.5;
@@ -246,6 +247,6 @@ void turnTask(void* parameter){
 void driveOp(){
   int lJoy = master.get_analog(ANALOG_LEFT_Y);
   int rJoy = master.get_analog(ANALOG_RIGHT_Y);
-  left(lJoy);
+  left(rJoy);
   right(rJoy);
 }
