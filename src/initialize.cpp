@@ -7,6 +7,8 @@ ADIButton nav('C');
 ADIButton enter('D');
 
 void autonSelector(void* parameter){
+  delay(200); // prevent the bug where buttons trigger randomly on startup
+
   const int autoCount = 4;
   const char *autoNames[autoCount] = {
     "big boi",

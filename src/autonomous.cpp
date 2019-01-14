@@ -8,19 +8,19 @@ ADIDigitalIn bypass('A');
 /*********************************************************/
 void bigBoi(){
   //intake ball under the nearest cap
-  intake(127);
-  driveAsync(3 TL);
-  while(drivePos() < 1.5 TL) delay(20);
-  setSpeed(60);
   intakeBallAsync();
-  while(drivePos() < 1.9 TL) delay(20);
+  drive(1.9 TL);
 
   //back up against wall
   drive(-2 TL);
 
   //align with flags
-  drive(.25 TL);
-  turn(83);
+  if(!mirror)
+    drive(.22 TL);
+  else
+    drive(.26 TL);
+    
+  turn(84);
 
   //launch the balls
   shoot();
@@ -32,15 +32,15 @@ void bigBoi(){
   ratchetAsync();
 
   //toggle low flag
-  turn(11);
+  turn(12);
   loadBallAsync();
-  driveAsync(2.1 TL);
+  driveAsync(2.3 TL);
   while(drivePos() < 1.7 TL) delay(20);
-  setSpeed(38);
+  setSpeed(40);
   while(isDriving()) delay(20);
 
   //backup to align with next cap
-  drive(-1 TL);
+  drive(-1.1 TL);
 
   //line up with the wall
   turn(-90);
@@ -56,21 +56,16 @@ void bigBoi(){
   while(isDriving()) delay(20);
   intake(0);
 
-  drive(-.2 TL);
+  drive(-.3 TL);
 
-  //align with flags in the center
-  adjustAsync();
-  turn(40);
-
-  //drive and shoot
-  driveAsync(1.8 TL);
-  setSlant(53);
-  delay(300);
+  //shoot flags in the center
+  turn(50);
   shoot();
-  ratchetAsync();
-  setSlant(0);
-  while(isDriving()) delay(20);
-  drive(-.4 TL);
+
+  driveAsync(1.8 TL);
+  while(drivePos() < .9 TL) delay(20);
+  setSlant(35);
+  delay(400);
 }
 
 
@@ -219,6 +214,14 @@ void autonomous() {
   Task adjust_task(adjustTask);
   Task intake_task(intakeTask);
   Task launcher_task(launcherTask);
+
+  if(!competition::is_connected() && bypass.get_value()){
+    auton = -1;
+    drive(-2 TL);
+    turn(-90);
+    turn(-90);
+    drive(-2 TL);
+  }
 
   switch(auton){
     case 0:

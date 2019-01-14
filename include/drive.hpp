@@ -1,3 +1,4 @@
+
 #ifndef _DRIVE_H_
 #define _DRIVE_H_
 
@@ -18,7 +19,7 @@ void turn(int sp);
 void setSpeed(int speed);
 void setSlant(int s);
 void setCurrent(int mA);
-
+void setBrakeMode(int mode);
 void driveOp();
 
 #endif

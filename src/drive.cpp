@@ -9,6 +9,7 @@ static int maxSpeed = MAX;
 static int slant = 0;
 
 
+
 //motors
 Motor left1(LEFTFRONT, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
 Motor left2(LEFTREAR, MOTOR_GEARSET_18, 0, MOTOR_ENCODER_DEGREES);
@@ -44,11 +45,12 @@ int drivePos(){
 
 /**************************************************/
 //slew control
-const int accel_step = 8;
-const int deccel_step = 256;
+const int accel_step = 9;
+const int deccel_step = 256; // no decel slew
+static int leftSpeed = 0;
+static int rightSpeed = 0;
 
 void leftSlew(int leftTarget){
-  static int leftSpeed = 0;
   int step;
 
   if(abs(leftSpeed) < abs(leftTarget))
@@ -63,13 +65,11 @@ void leftSlew(int leftTarget){
   else
     leftSpeed = leftTarget;
 
-  //set motors
   left(leftSpeed);
 }
 
 //slew control
 void rightSlew(int rightTarget){
-  static int rightSpeed = 0;
   int step;
 
   if(abs(rightSpeed) < abs(rightTarget))
@@ -84,8 +84,32 @@ void rightSlew(int rightTarget){
   else
     rightSpeed = rightTarget;
 
-  //set motors
   right(rightSpeed);
+}
+
+/**************************************************/
+//slop correction
+void slop(int leftSp, int rightSp){
+
+  bool leftDir = leftSp > 0 ? true : false;
+  bool rightDir = rightSp > 0 ? true : false;
+
+  int power = 20;
+
+  if(leftDir)
+    left(power);
+  else
+    left(-power);
+
+  if(rightDir)
+    right(power);
+  else
+    right(-power);
+
+  delay(70);
+
+  left(0);
+  right(0);
 }
 
 /**************************************************/
@@ -115,9 +139,8 @@ bool isDriving(){
   last = curr;
 
   //not driving if we haven't moved
-  if(count > 10){
+  if(count > 3)
     return false;
-  }
   else
     return true;
 
@@ -132,18 +155,24 @@ void driveAsync(int sp){
 }
 
 void turnAsync(int sp){
+  if(mirror)
+    sp = -sp; // inverted turn for blue auton
   reset();
   turnTarget = sp;
   driveMode = false;
 }
 
 void drive(int sp){
+  slop(sp, sp);
   driveAsync(sp);
+  delay(300);
   while(isDriving()) delay(20);
 }
 
 void turn(int sp){
+  slop(sp, -sp);
   turnAsync(sp);
+  delay(300);
   while(isDriving()) delay(20);
 }
 
@@ -154,11 +183,8 @@ void setSpeed(int speed){
 }
 
 void setSlant(int s){
-  if(!mirror)
+  if(mirror)
     s = -s;
-
-  if(s < 0)
-    s += 5;
 
   slant = s;
 }
@@ -170,6 +196,25 @@ void setCurrent(int mA){
   right2.set_current_limit(mA);
 }
 
+void setBrakeMode(int mode){
+  motor_brake_mode_e_t brakeMode;
+  switch(mode){
+    case 0:
+      brakeMode = MOTOR_BRAKE_COAST;
+      break;
+    case 1:
+      brakeMode = MOTOR_BRAKE_BRAKE;
+      break;
+    case 2:
+      brakeMode = MOTOR_BRAKE_HOLD;
+      break;
+  }
+
+  left1.set_brake_mode(brakeMode);
+  left2.set_brake_mode(brakeMode);
+  right1.set_brake_mode(brakeMode);
+  right2.set_brake_mode(brakeMode);
+}
 /**************************************************/
 //task control
 void driveTask(void* parameter){
@@ -219,16 +264,10 @@ void turnTask(void* parameter){
 
     int sp = turnTarget;
 
-
-
-    if(mirror)
-      sp = -sp; // inverted turn speed for blue auton
-
-
     if(sp > 0)
-      sp *= 2.48;
+      sp *= 2.35;
     else
-      sp *= 2.55;
+      sp *= 2.35;
 
     double kp = .9;
     double kd = 3.5;
@@ -253,8 +292,9 @@ void turnTask(void* parameter){
 //operator control
 void driveOp(){
   setCurrent(2500);
+  setBrakeMode(0);
   int lJoy = master.get_analog(ANALOG_LEFT_Y);
   int rJoy = master.get_analog(ANALOG_RIGHT_Y);
   left(lJoy);
-  right(lJoy);
+  right(rJoy);
 }
