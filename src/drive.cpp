@@ -154,13 +154,20 @@ void setSpeed(int speed){
 }
 
 void setSlant(int s){
-  if(!mirror.get_value())
+  if(!mirror)
     s = -s;
 
   if(s < 0)
     s += 5;
 
   slant = s;
+}
+
+void setCurrent(int mA){
+  left1.set_current_limit(mA);
+  left2.set_current_limit(mA);
+  right1.set_current_limit(mA);
+  right2.set_current_limit(mA);
 }
 
 /**************************************************/
@@ -214,7 +221,7 @@ void turnTask(void* parameter){
 
 
 
-    if(!mirror.get_value())
+    if(mirror)
       sp = -sp; // inverted turn speed for blue auton
 
 
@@ -245,8 +252,9 @@ void turnTask(void* parameter){
 /**************************************************/
 //operator control
 void driveOp(){
+  setCurrent(2500);
   int lJoy = master.get_analog(ANALOG_LEFT_Y);
   int rJoy = master.get_analog(ANALOG_RIGHT_Y);
-  left(rJoy);
-  right(rJoy);
+  left(lJoy);
+  right(lJoy);
 }

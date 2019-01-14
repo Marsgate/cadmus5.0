@@ -16,7 +16,8 @@ using namespace pros;
 using namespace pros::literals;
 
 extern Controller master;
-extern ADIDigitalIn mirror;
+extern bool mirror;
+extern int auton;
 
 #ifdef __cplusplus
 extern "C" {

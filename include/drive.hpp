@@ -17,6 +17,7 @@ void turn(int sp);
 
 void setSpeed(int speed);
 void setSlant(int s);
+void setCurrent(int mA);
 
 void driveOp();
 

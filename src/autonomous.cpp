@@ -3,10 +3,7 @@
 //definition of a tile in encoder ticks
 #define TL *545
 
-//jumpers
-ADIDigitalIn auton('B');
-ADIDigitalIn mirror('A');
-
+ADIDigitalIn bypass('A');
 
 /*********************************************************/
 void bigBoi(){
@@ -223,11 +220,13 @@ void autonomous() {
   Task intake_task(intakeTask);
   Task launcher_task(launcherTask);
 
-
-  if(auton.get_value()){
-    bigBoi();
-  }else{
-    skills();
+  switch(auton){
+    case 0:
+      bigBoi();
+      break;
+    case 1:
+      skills();
+      break;
   }
 
   drive_task.remove();
