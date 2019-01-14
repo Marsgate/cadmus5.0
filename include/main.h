@@ -12,6 +12,17 @@
 #include "adjuster.hpp"
 #include "lift.hpp"
 
+//ports
+#define LEFTFRONT 17
+#define LEFTREAR 16
+#define RIGHTFRONT 15
+#define RIGHTREAR 14
+#define LAUNCHER 13
+#define ADJUSTER 18
+#define LIFT 19
+#define INTAKE 20
+
+
 using namespace pros;
 using namespace pros::literals;
 

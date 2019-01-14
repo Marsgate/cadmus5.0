@@ -4,10 +4,10 @@ static int launcherTarget = 0;
 const int ratchetDistance = 50;
 
 //motors
-Motor launcher1(14, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
+Motor launcher1(LAUNCHER, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
 
 //line sensors
-ADIAnalogIn line('E');
+ADIAnalogIn line('G');
 
 /**************************************************/
 //basic control

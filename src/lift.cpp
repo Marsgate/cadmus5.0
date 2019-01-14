@@ -1,7 +1,7 @@
 #include "main.h"
 
 
-Motor lift1(16, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
+Motor lift1(LIFT, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
 
 
 
