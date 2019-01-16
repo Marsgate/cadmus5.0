@@ -89,27 +89,14 @@ void rightSlew(int rightTarget){
 
 /**************************************************/
 //slop correction
-void slop(int leftSp, int rightSp){
-
-  bool leftDir = leftSp > 0 ? true : false;
-  bool rightDir = rightSp > 0 ? true : false;
-
-  int power = 20;
-
-  if(leftDir)
-    left(power);
-  else
-    left(-power);
-
-  if(rightDir)
-    right(power);
-  else
-    right(-power);
-
-  delay(70);
-
-  left(0);
-  right(0);
+void slop(int sp){
+  if(sp > 0)
+    left(80);
+    delay(80);
+  if(sp < 0){
+    right(-80);
+    delay(150);
+  }
 }
 
 /**************************************************/
@@ -119,7 +106,10 @@ bool isDriving(){
   static int last = 0;
   static int lastTarget = 0;
 
-  int curr = right1.get_position();
+  int leftPos = left1.get_position();
+  int rightPos = right1.get_position();
+
+  int curr = (abs(leftPos) + abs(rightPos))/2;
   int thresh = 3;
   int target = turnTarget;
 
@@ -139,7 +129,7 @@ bool isDriving(){
   last = curr;
 
   //not driving if we haven't moved
-  if(count > 3)
+  if(count > 4)
     return false;
   else
     return true;
@@ -149,6 +139,7 @@ bool isDriving(){
 /**************************************************/
 //autonomous functions
 void driveAsync(int sp){
+  slop(sp);
   reset();
   driveTarget = sp;
   driveMode = true;
@@ -163,16 +154,14 @@ void turnAsync(int sp){
 }
 
 void drive(int sp){
-  slop(sp, sp);
   driveAsync(sp);
-  delay(300);
+  delay(450);
   while(isDriving()) delay(20);
 }
 
 void turn(int sp){
-  slop(sp, -sp);
   turnAsync(sp);
-  delay(300);
+  delay(450);
   while(isDriving()) delay(20);
 }
 

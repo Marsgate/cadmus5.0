@@ -4,7 +4,7 @@ int auton = 0; // keeps track of what auton is selected
 bool mirror = false;
 
 ADIButton nav('C');
-ADIButton enter('D');
+ADIButton color('D');
 
 void autonSelector(void* parameter){
   delay(200); // prevent the bug where buttons trigger randomly on startup
@@ -19,26 +19,20 @@ void autonSelector(void* parameter){
 
   //auton selector
   lcd::initialize();
-  bool state = true;
   lcd::set_text(0, "Select an Auton");
   while(1){
     //display auton
-    lcd::print(2, "%s%s", autoNames[auton], state ? "<" : "");
-    lcd::print(4, "%s%s", mirror ? "blue" : "red", state ? "" : "<");
+    lcd::print(2, "%s", autoNames[auton]);
+    lcd::print(4, "%s", mirror ? "blue" : "red");
 
-    if(state){
-      if(nav.get_new_press()){
-        auton++;
-        if(auton == autoCount)
-          auton = 0;
-      }
-    }else{
-      if(nav.get_new_press())
-          mirror = !mirror;
+    if(nav.get_new_press()){
+      auton++;
+      if(auton == autoCount)
+        auton = 0;
     }
 
-    if(enter.get_new_press())
-      state = !state;
+    if(color.get_new_press())
+      mirror = !mirror;
 
     delay(50);
   }
