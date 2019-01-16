@@ -72,7 +72,6 @@ void bigBoi(){
 
 /*********************************************************/
 void skills(){
-  /*
   //intake ball and flip cap
   intake(-80);
   driveAsync(2.4 TL);
@@ -84,8 +83,8 @@ void skills(){
 
   //align with flags
   drive(.2 TL);
-  turn(88);
-  drive(1.9 TL);
+  turn(87);
+  drive(2.05 TL);
   turn(-90);
   drive(-.5 TL);
   drive(.22 TL);
@@ -117,7 +116,7 @@ void skills(){
   delay(800);
   turn(-90);
   drive(-.5 TL);
-  */
+
   //intake ball and flip cap
   intake(-127);
   driveAsync(2.2 TL);
@@ -128,8 +127,8 @@ void skills(){
   while(isDriving()) delay(20);
 
   //align with flags
-  drive(-.3 TL);
-  turn(81);
+  drive(-.25 TL);
+  turn(82);
 
   //shoot both flags
   shoot();
@@ -162,12 +161,14 @@ void skills(){
   turn(178);
   intake(-60);
   driveAsync(3.5 TL);
-  while(drivePos() < 1.6 TL) delay(20);
-  setSpeed(80);
+  while(drivePos() < 1.4 TL) delay(20);
+  setSpeed(90);
+  while(drivePos() < 1.8 TL) delay(20);
+  setSpeed(50);
   while(isDriving()) delay(20);
 
   //low flag
-  drive(-.55 TL);
+  drive(-.45 TL);
   turn(90);
   driveAsync(1.8 TL);
   while(drivePos() < .5 TL) delay(20);
