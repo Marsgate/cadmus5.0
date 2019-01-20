@@ -1,8 +1,7 @@
 #include "main.h"
 
 
-Motor lift1(LIFT, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
-
+Motor lift1(LIFT, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 
 
 /**************************************************/
@@ -14,7 +13,7 @@ void lift(int vel){
 
 void setLiftAsync(int sp){
   sp *= 5; // gear ratio compensation
-  lift1.move_absolute(sp, 100);
+  lift1.move_absolute(sp, 200);
 }
 
 void setLift(int sp){
@@ -28,11 +27,17 @@ void setLift(int sp){
 void liftOp(){
   static int vel;
 
-  lift(vel);
+  if(master.get_digital(DIGITAL_Y))
+    setLiftAsync(179);
+  else
+    lift(vel);
 
-  if(master.get_digital(DIGITAL_X))
-    vel = 127;
-  else if(master.get_digital(DIGITAL_B))
+  if(master.get_digital(DIGITAL_X)){
+    if(lift1.get_position() < 500)
+      vel = 127;
+    else
+      vel = 60;
+  }else if(master.get_digital(DIGITAL_B))
     vel = -127;
   else
     vel = 0;

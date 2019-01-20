@@ -69,6 +69,98 @@ void bigBoi(){
 }
 
 
+/*********************************************************/
+void backSquare(){
+  //cap throw
+  driveAsync(-1.9 TL);
+  while(drivePos() > -1.7 TL) delay(20);
+  setLiftAsync(200);
+  while(isDriving()) delay(20);
+  turn(-135);
+  delay(500);
+
+
+  //retract lift
+  lift(-127);
+  delay(800);
+  lift(0);
+
+  //align with wall
+  turn(-35);
+  drive(-1.2 TL);
+  turn(90);
+  drive(-.6 TL);
+
+  //align with cap
+  drive(1.1 TL);
+  turn(-90);
+
+  //intake ball under the cap
+  intakeBallAsync();
+  drive(1 TL);
+
+  //align for park
+  drive(-.3 TL);
+  turn(90);
+  drive(.8 TL);
+
+  //alliance park
+  driveAsync(1.6 TL);
+  while(drivePos() < .9 TL) delay(20);
+  drive(-1);
+}
+
+
+/*********************************************************/
+void delayShotBack(){
+  //intake ball under the nearest cap
+  intakeBallAsync();
+  drive(1.9 TL);
+
+  //back up against wall
+  drive(-2 TL);
+
+  //align with flags
+  drive(.2 TL);
+  turn(87);
+  drive(2.05 TL);
+  turn(-90);
+  drive(-.5 TL);
+  drive(.22 TL);
+  turn(84);
+
+  //launch the balls
+  shoot();
+  ratchetAsync();
+  intake(127);
+  adjust();
+  while(!isLoaded()) delay(20);
+  shoot();
+  ratchetAsync();
+
+  //toggle low flag
+  turn(13);
+  loadBallAsync();
+  driveAsync(2.3 TL);
+  while(drivePos() < 1.7 TL) delay(20);
+  setSpeed(40);
+  while(isDriving()) delay(20);
+
+  //align for park
+  drive(-3 TL);
+  turn(-90);
+
+  //alliance park
+  intake(127);
+  driveAsync(2.9 TL);
+  while(drivePos() < 2.4 TL) delay(20);
+  setSpeed(20);
+  while(isDriving()) delay(20);
+  driveAsync(.4 TL);
+  setSpeed(40);
+  while(isDriving()) delay(20);
+}
+
 
 /*********************************************************/
 void skills(){
@@ -111,24 +203,21 @@ void skills(){
   // second flag column =============================
 
   //backup to align with next cap
-  drive(-2 TL);
+  drive(-2.03 TL);
   intake(-127);
   delay(800);
   turn(-90);
   drive(-.5 TL);
 
   //intake ball and flip cap
-  intake(-127);
-  driveAsync(2.2 TL);
-  while(drivePos() < .8 TL) delay(20);
-  setSpeed(80);
-  while(drivePos() < 1.6 TL) delay(20);
+  intake(-80);
+  driveAsync(2.4 TL);
+  while(drivePos() < 2.2 TL) delay(20);
   intakeBallAsync();
-  while(isDriving()) delay(20);
 
   //align with flags
-  drive(-.25 TL);
-  turn(82);
+  drive(-.24 TL);
+  turn(79);
 
   //shoot both flags
   shoot();
@@ -148,78 +237,51 @@ void skills(){
 
   //align with cap
   drive(-1.15 TL);
-  turn(85);
+  turn(88);
 
   //flip cap
-  intake(-60);
-  driveAsync(1.4 TL);
+  intake(-80);
+  driveAsync(1.25 TL);
   setSpeed(60);
   while(isDriving()) delay(20);
 
   //flip next cap
   drive(-.3 TL);
-  turn(178);
+  turn(176);
   intake(-60);
-  driveAsync(3.5 TL);
-  while(drivePos() < 1.4 TL) delay(20);
-  setSpeed(90);
-  while(drivePos() < 1.8 TL) delay(20);
-  setSpeed(50);
+  driveAsync(3.1 TL);
+  while(drivePos() < 1.5 TL) delay(20);
+  setSpeed(80);
+  while(drivePos() < 1.9 TL) delay(20);
+  setSpeed(60);
   while(isDriving()) delay(20);
 
   //low flag
-  drive(-.45 TL);
+  drive(-.2 TL);
+  intake(127);
   turn(90);
-  driveAsync(1.8 TL);
+  driveAsync(1.6 TL);
   while(drivePos() < .5 TL) delay(20);
-  setSpeed(40);
+  setSpeed(60);
   while(isDriving()) delay(20);
 
-  // third column high flags ============================
+  // last flag and park ============================
 
-  //align with cap
+  //shoot flag
+  adjustAsync();
   drive(-2 TL);
-  turn(90);
-
-  //intake ball under cap
-  intake(0);
-  intakeBallAsync();
-  drive(1 TL);
-
-  //align with platform
-  drive(-.38 TL);
-  turn(-90);
-  drive(-.35 TL);
-
-  //align with flags
-  drive(.3 TL);
-  turn(-31);
-
-  //shoot both flags
+  turn(-19);
   shoot();
-  ratchetAsync();
-  intake(127);
-  adjust();
-  while(!isLoaded()) delay(20);
-  shoot();
-  ratchetAsync();
-
-  // park ============================
-
-  //align with platform
-  turn(32);
-  drive(-.5 TL);
-  drive(.3 TL);
 
   //align against the wall
-  turn(-90);
+  turn(-81);
   intake(-127);
-  drive(1.8 TL);
+  drive(1.4 TL);
 
   //align for park
   drive(-.7 TL);
   turn(-90);
-  drive(1.1 TL);
+  drive(1.14 TL);
   turn(-90);
   drive(.4 TL);
 
@@ -229,11 +291,15 @@ void skills(){
   while(drivePos() < 1.4 TL) delay(20);
   setSpeed(20);
   while(isDriving()) delay(20);
+  driveAsync(.4 TL);
+  setSpeed(40);
+  while(isDriving()) delay(20);
 
   //center park
   driveAsync(1.6 TL);
-  while(drivePos() < .9 TL) delay(20);
+  while(drivePos() < .85 TL) delay(20);
   drive(-1);
+  delay(3000);
 }
 
 void autonomous() {
@@ -259,6 +325,12 @@ void autonomous() {
       break;
     case 1:
       skills();
+      break;
+    case 2:
+      backSquare();
+      break;
+    case 3:
+      delayShotBack();
       break;
   }
 

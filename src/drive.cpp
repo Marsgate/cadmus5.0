@@ -90,12 +90,9 @@ void rightSlew(int rightTarget){
 /**************************************************/
 //slop correction
 void slop(int sp){
-  if(sp > 0)
-    left(80);
-    delay(80);
   if(sp < 0){
-    right(-80);
-    delay(150);
+    right(-40);
+    delay(100);
   }
 }
 
