@@ -37,6 +37,8 @@ void reset(){
   left2.tare_position();
   right1.tare_position();
   right2.tare_position();
+  left(0);
+  right(0);
 }
 
 int drivePos(){

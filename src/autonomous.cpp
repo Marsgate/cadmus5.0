@@ -15,11 +15,7 @@ void bigBoi(){
   drive(-2 TL);
 
   //align with flags
-  if(!mirror)
-    drive(.22 TL);
-  else
-    drive(.24 TL);
-
+  drive(.22 TL);
   turn(84);
 
   //launch the balls
@@ -265,7 +261,7 @@ void skills(){
   setSpeed(60);
   while(isDriving()) delay(20);
 
-  // last flag and park ============================
+  // last flags and park ============================
 
   //shoot flag
   adjustAsync();
@@ -299,7 +295,7 @@ void skills(){
   driveAsync(1.6 TL);
   while(drivePos() < .85 TL) delay(20);
   drive(-1);
-  delay(3000);
+  reset();
 }
 
 void autonomous() {
