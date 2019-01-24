@@ -2,8 +2,8 @@
 #define _LIFT_H_
 
 void lift(int vel);
-void setLiftAsync(int sp);
-void setLift(int sp);
+void liftFast(int sp);
+void liftSlow(int sp);
 void liftOp();
 
 #endif

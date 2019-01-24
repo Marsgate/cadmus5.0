@@ -43,6 +43,10 @@ void loadBallAsync(){
   intakeTarget = 2;
 }
 
+void loadAndClearAsync(){
+  intakeTarget = 3;
+}
+
 void intakeBall(){
   intake(127);
   while(!hasBall()) delay(20);
@@ -53,6 +57,11 @@ void loadBall(){
   intake(127);
   while(!isLoaded()) delay(20);
   intake(0);
+}
+
+void loadAndClear(){
+  loadBall();
+  intake(-127);
 }
 
 /**************************************************/
@@ -68,6 +77,8 @@ void intakeTask(void* parameter){
       case 2:
         loadBall();
         break;
+      case 3:
+        loadAndClear();
     }
 
     intakeTarget = 0;

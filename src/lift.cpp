@@ -3,7 +3,6 @@
 
 Motor lift1(LIFT, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 
-
 /**************************************************/
 //basic control
 void lift(int vel){
@@ -11,15 +10,14 @@ void lift(int vel){
   lift1.move(vel);
 }
 
-void setLiftAsync(int sp){
+void liftFast(int sp){
   sp *= 5; // gear ratio compensation
   lift1.move_absolute(sp, 200);
 }
 
-void setLift(int sp){
-  setLiftAsync(sp);
-  int sv = lift1.get_position();
-  while(sv != sp) delay(20);
+void liftSlow(int sp){
+  sp *= 5; // gear ratio compensation
+  lift1.move_absolute(sp, 60);
 }
 
 /**************************************************/
@@ -28,7 +26,7 @@ void liftOp(){
   static int vel;
 
   if(master.get_digital(DIGITAL_Y))
-    setLiftAsync(179);
+    liftFast(179);
   else
     lift(vel);
 

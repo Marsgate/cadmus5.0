@@ -11,6 +11,7 @@
 #include "launcher.hpp"
 #include "adjuster.hpp"
 #include "lift.hpp"
+#include "macros.hpp"
 
 //ports
 #define LEFTFRONT 17
@@ -22,6 +23,8 @@
 #define LIFT 19
 #define INTAKE 20
 
+//definition of a tile in encoder ticks
+#define TL *545
 
 using namespace pros;
 using namespace pros::literals;
