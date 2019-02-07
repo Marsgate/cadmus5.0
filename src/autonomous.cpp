@@ -32,14 +32,15 @@ void bigBoi(){
 
   //shoot flags in the center
   drive(-.3 TL);
-  turn(50);
+  turn(52);
   shoot();
 
   //low flag
-  driveAsync(1.8 TL);
-  while(drivePos() < .9 TL) delay(20);
-  setSlant(35);
+  driveAsync(1.6 TL);
+  while(drivePos() < .6 TL) delay(20);
+  setSlant(40);
   delay(400);
+  setSlant(0);
 }
 
 /*********************************************************/
@@ -117,22 +118,22 @@ void skills(){
   // cap stack =============================
 
   //pick up cap
-  drive(-1.23 TL);
+  drive(-1.1 TL);
   turn(90);
   drive(-1.2 TL);
   drive(.3 TL);
-  turn(80);
-  drive(-1.07 TL);
+  turn(78);
+  drive(-1.0 TL);
   liftFast(80);
   delay(400);
 
   //stack cap
-  drive(1.15 TL);
-  turn(99);
+  drive(1.0 TL);
+  turn(100);
   drive(.5 TL);
   reset();
   liftSlow(183);
-  delay(500);
+  delay(600);
   drive(-.2 TL);
   drive(-.95 TL);
   liftFast(2);
@@ -164,12 +165,12 @@ void skills(){
   intakeFlip();
 
   //shoot both flags
-  drive(-.25 TL);
+  drive(-.27 TL);
   turn(80);
   doubleShot();
 
   //toggle the low flag
-  turn(12);
+  turn(13);
   loadAndClearAsync();
   drive(2.3 TL);
 

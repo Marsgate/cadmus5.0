@@ -95,7 +95,7 @@ void intakeOp(){
   if(master.get_digital(DIGITAL_R1))
     vel = 127;
   else if(master.get_digital(DIGITAL_L1))
-    vel = -60;
+    vel = -30;
   else
     vel = 0;
 }

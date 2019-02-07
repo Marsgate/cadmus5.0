@@ -37,7 +37,7 @@ void alliancePark(){
 void backToFront(){
   drive(.2 TL);
   turn(86);
-  drive(2.05 TL);
+  drive(2 TL);
   turn(-90);
   drive(-.5 TL);
 }
@@ -49,7 +49,7 @@ void wallToFlag(){
 }
 
 void lowFlag(){
-  turn(12);
+  turn(14);
   loadAndClearAsync();
   driveAsync(2.3 TL);
   while(drivePos() < 1.7 TL) delay(20);
@@ -58,9 +58,9 @@ void lowFlag(){
 }
 
 void intakeFlip(){
-  intake(-80);
+  intake(-40);
   driveAsync(2.4 TL);
-  while(drivePos() < 2 TL) delay(20);
+  while(drivePos() < 1.95 TL) delay(20);
   intakeBallAsync();
   while(drivePos() < 2.2 TL) delay(20);
 }
