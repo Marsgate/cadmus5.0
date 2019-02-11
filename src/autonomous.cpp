@@ -1,5 +1,7 @@
 #include "main.h"
 
+bool highFlag;
+
 /*********************************************************/
 void bigBoi(){
   //intake ball under the nearest cap
@@ -32,49 +34,22 @@ void bigBoi(){
 
   //shoot flags in the center
   drive(-.3 TL);
+  if(highFlag)
+    adjustAsync();
   turn(52);
   shoot();
 
   //low flag
   driveAsync(1.6 TL);
-  while(drivePos() < .6 TL) delay(20);
+  while(drivePos() < .5 TL) delay(20);
   setSlant(40);
-  delay(400);
+  delay(300);
   setSlant(0);
+  ratchet();
 }
 
 /*********************************************************/
 void backSquare(){
-  /*
-  //cap throw
-  driveAsync(-1.9 TL);
-  while(drivePos() > -1.5 TL) delay(20);
-  setSpeed(60);
-  while(drivePos() > -1.7 TL) delay(20);
-  liftFast(190);
-  while(isDriving()) delay(20);
-  turn(-130);
-  delay(500);
-
-  //retract lift
-  lift(-127);
-  delay(800);
-  lift(0);
-
-  //align with wall
-  turn(-35);
-  drive(-1.2 TL);
-  turn(90);
-  drive(-.6 TL);
-
-  //align with cap
-  drive(1.1 TL);
-  turn(-90);
-
-  //intake ball under the cap
-  intakeBallAsync();
-  drive(1.1 TL);
-  */
   //intake ball under the nearest cap
   intakeBallAsync();
   drive(1.9 TL);
@@ -118,7 +93,7 @@ void skills(){
   // cap stack =============================
 
   //pick up cap
-  drive(-1.1 TL);
+  drive(-1.25 TL);
   turn(90);
   drive(-1.2 TL);
   drive(.3 TL);
@@ -128,8 +103,8 @@ void skills(){
   delay(400);
 
   //stack cap
-  drive(1.0 TL);
-  turn(100);
+  drive(1.05 TL);
+  turn(105);
   drive(.5 TL);
   reset();
   liftSlow(183);
@@ -157,7 +132,7 @@ void skills(){
 
   //backup to align with next cap
   loadAndClearAsync();
-  drive(-2.03 TL);
+  drive(-2 TL);
   turn(-90);
   drive(-.5 TL);
 
@@ -165,12 +140,12 @@ void skills(){
   intakeFlip();
 
   //shoot both flags
-  drive(-.27 TL);
-  turn(80);
+  drive(-.3 TL);
+  turn(81);
   doubleShot();
 
   //toggle the low flag
-  turn(13);
+  turn(17);
   loadAndClearAsync();
   drive(2.3 TL);
 
@@ -220,7 +195,7 @@ void skills(){
   //align for park
   drive(-.7 TL);
   turn(-90);
-  drive(1.1 TL);
+  drive(1.0 TL);
   turn(-90);
   drive(.4 TL);
 
@@ -239,6 +214,7 @@ void skills(){
 }
 
 void autonomous() {
+  highFlag = false;
   reset(); // reset the drive encoders
 
   Task drive_task(driveTask);
@@ -259,6 +235,10 @@ void autonomous() {
       break;
     case 3:
       zaccAttack();
+      break;
+    case 4:
+      highFlag = true;
+      bigBoi();
       break;
   }
 

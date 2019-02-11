@@ -2,7 +2,7 @@
 
 #define MAX 127;
 
-static bool driveMode = true;
+static int driveMode = 1;
 static int driveTarget = 0;
 static int turnTarget = 0;
 static int maxSpeed = MAX;
@@ -92,10 +92,16 @@ void rightSlew(int rightTarget){
 /**************************************************/
 //slop correction
 void slop(int sp){
+  driveMode = 2;
   if(sp < 0){
-    right(-70);
-    delay(120);
+    left(-30);
+    delay(20);
+  }else{
+    right(30);
+    delay(20);
   }
+  driveMode = 1;
+
 }
 
 /**************************************************/
@@ -112,7 +118,7 @@ bool isDriving(){
   int thresh = 3;
   int target = turnTarget;
 
-  if(driveMode)
+  if(driveMode == 1)
     target = driveTarget;
 
 
@@ -138,9 +144,10 @@ bool isDriving(){
 /**************************************************/
 //autonomous functions
 void driveAsync(int sp){
+  slop(sp);
   reset();
   driveTarget = sp;
-  driveMode = true;
+  driveMode = 1;
 }
 
 void turnAsync(int sp){
@@ -148,7 +155,7 @@ void turnAsync(int sp){
     sp = -sp; // inverted turn for blue auton
   reset();
   turnTarget = sp;
-  driveMode = false;
+  driveMode = 0;
 }
 
 void drive(int sp){
@@ -210,7 +217,7 @@ void driveTask(void* parameter){
   while(1){
     delay(20);
 
-    if(!driveMode)
+    if(driveMode != 1)
       continue;
 
     int sp = driveTarget;
@@ -246,7 +253,7 @@ void turnTask(void* parameter){
   while(1){
     delay(20);
 
-    if(driveMode)
+    if(driveMode != 0)
       continue;
 
     int sp = turnTarget;
@@ -254,7 +261,7 @@ void turnTask(void* parameter){
     if(sp > 0)
       sp *= 2.35;
     else
-      sp *= 2.35;
+      sp *= 2.3;
 
     double kp = .9;
     double kd = 3.5;

@@ -18,7 +18,7 @@ void doubleShot(){
 
 void park(){
   driveAsync(1.6 TL);
-  while(drivePos() < .89 TL) delay(20);
+  while(drivePos() < .91 TL) delay(20);
   drive(-1);
   reset();
 }
@@ -49,7 +49,7 @@ void wallToFlag(){
 }
 
 void lowFlag(){
-  turn(14);
+  turn(15);
   loadAndClearAsync();
   driveAsync(2.3 TL);
   while(drivePos() < 1.7 TL) delay(20);
@@ -58,9 +58,11 @@ void lowFlag(){
 }
 
 void intakeFlip(){
-  intake(-40);
+  intake(-30);
   driveAsync(2.4 TL);
-  while(drivePos() < 1.95 TL) delay(20);
+  while(drivePos() < 1.3 TL) delay(20);
+  setSpeed(70);
+  while(drivePos() < 1.8 TL) delay(20);
   intakeBallAsync();
-  while(drivePos() < 2.2 TL) delay(20);
+  while(isDriving()) delay(20);
 }

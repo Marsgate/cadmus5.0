@@ -9,12 +9,13 @@ ADIButton color('D');
 void autonSelector(void* parameter){
   delay(200); // prevent the bug where buttons trigger randomly on startup
 
-  const int autoCount = 4;
+  const int autoCount = 5;
   const char *autoNames[autoCount] = {
     "big boi",
     "skills",
     "back",
-    "zaccAttack"
+    "zaccAttack",
+    "big boi high flag"
   };
 
   //auton selector
