@@ -51,17 +51,17 @@ void wallToFlag(){
 void lowFlag(){
   turn(15);
   loadAndClearAsync();
-  driveAsync(2.3 TL);
-  while(drivePos() < 1.7 TL) delay(20);
-  setSpeed(40);
+  driveAsync(2.5 TL);
+  while(drivePos() < 1.1 TL) delay(20);
+  setSpeed(60);
   while(isDriving()) delay(20);
 }
 
 void intakeFlip(){
   intake(-30);
   driveAsync(2.4 TL);
-  while(drivePos() < 1.3 TL) delay(20);
-  setSpeed(70);
+  while(drivePos() < 1.2 TL) delay(20);
+  setSpeed(50);
   while(drivePos() < 1.8 TL) delay(20);
   intakeBallAsync();
   while(isDriving()) delay(20);

@@ -87,45 +87,63 @@ void zaccAttack(){
 
 /*********************************************************/
 void skills(){
-  //cap 1
+  //first shot
+  shoot();
+  ratchetAsync();
+  turn(-93);
+  drive(-.5 TL);
+
+  // cap 1
   intakeFlip();
+  loadBall();
 
-  // cap stack =============================
+  // cap 2
+  drive(-.4 TL);
+  turn(-42);
+  intake(-60);
+  driveAsync(1.5 TL);
+  while(drivePos() < .6 TL) delay(20);
+  setSpeed(30);
+  while(isDriving()) delay(20);
 
-  //pick up cap
-  drive(-1.25 TL);
-  turn(90);
-  drive(-1.2 TL);
+  // cap 3
+  turn(115);
+  drive(-.8 TL);
   drive(.3 TL);
-  turn(78);
-  drive(-1.0 TL);
-  liftFast(80);
-  delay(400);
+  turn(90);
+  driveAsync(1.2 TL);
+  setSpeed(60);
+  while(isDriving()) delay(20);
 
-  //stack cap
-  drive(1.05 TL);
-  turn(105);
-  drive(.5 TL);
-  reset();
-  liftSlow(183);
-  delay(600);
-  drive(-.2 TL);
-  drive(-.95 TL);
-  liftFast(2);
+  // align with wall
+  turn(-90);
+  drive(-.5 TL);
+  drive(1.2 TL);
+  turn(95);
+  intake(-30);
+  driveAsync(2.4 TL);
+  while(drivePos() < 1 TL);
+  setSpeed(60);
+  while(drivePos() < 1.5 TL);
+  setSpeed(30);
+  while(isDriving()) delay(20);
 
   // first flag column =============================
 
-  //back up against wall
-  turn(91);
-  driveAsync(-1.5 TL);
-  while(drivePos() > -.7 TL) delay(20);
-  setSpeed(70);
-  while(isDriving()) delay(20);
-
+  //align with flags
+  drive(-.25 TL);
+  turn(-92);
+  drive(2 TL);
+  turn(-90);
+  drive(-.5 TL);
 
   //score first flag column
-  backToFront(); //alignment
-  wallToFlag(); //aim and shoot
+
+  adjustAsync();
+  drive(.22 TL);
+  turn(85);
+  shoot();
+  ratchetAsync();
   lowFlag();
 
   // second flag column =============================
@@ -161,7 +179,7 @@ void skills(){
 
   //cap 4
   drive(-.3 TL);
-  turn(176);
+  turn(173);
   intake(-60);
   driveAsync(3.1 TL);
   while(drivePos() < 1.5 TL) delay(20);

@@ -93,12 +93,14 @@ void rightSlew(int rightTarget){
 //slop correction
 void slop(int sp){
   driveMode = 2;
-  if(sp < 0){
-    left(-30);
-    delay(20);
+  if(sp > 0){
+    left(10);
+    right(10);
+    delay(100);
   }else{
-    right(30);
-    delay(20);
+    left(-10);
+    right(-10);
+    delay(100);
   }
   driveMode = 1;
 
