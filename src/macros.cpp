@@ -13,6 +13,7 @@ void doubleShot(){
     delay(20);
   }
   shoot();
+  adjustAsync();
   ratchetAsync();
 }
 
@@ -25,8 +26,8 @@ void park(){
 
 void alliancePark(){
   intake(127);
-  driveAsync(2.9 TL);
-  while(drivePos() < 2.4 TL) delay(20);
+  driveAsync(1.9 TL);
+  while(drivePos() < 1.4 TL) delay(20);
   setSpeed(20);
   while(isDriving()) delay(20);
   driveAsync(.4 TL);
@@ -37,7 +38,7 @@ void alliancePark(){
 void backToFront(){
   drive(.2 TL);
   turn(86);
-  drive(2 TL);
+  drive(2.05 TL);
   turn(-90);
   drive(-.5 TL);
 }
@@ -49,19 +50,16 @@ void wallToFlag(){
 }
 
 void lowFlag(){
-  turn(15);
+  turn(16);
   loadAndClearAsync();
-  driveAsync(2.5 TL);
-  while(drivePos() < 1.1 TL) delay(20);
-  setSpeed(60);
-  while(isDriving()) delay(20);
+  slowDrive(2.5 TL, 1.1 TL);
 }
 
 void intakeFlip(){
   intake(-30);
   driveAsync(2.4 TL);
   while(drivePos() < 1.2 TL) delay(20);
-  setSpeed(50);
+  setSpeed(70);
   while(drivePos() < 1.8 TL) delay(20);
   intakeBallAsync();
   while(isDriving()) delay(20);

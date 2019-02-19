@@ -172,6 +172,18 @@ void turn(int sp){
   while(isDriving()) delay(20);
 }
 
+void slowDrive(int sp, int dp){
+  driveAsync(sp);
+
+  if(sp > 0)
+    while(drivePos() < dp) delay(20);
+  else
+    while(drivePos() > dp) delay(20);
+
+  setSpeed(60);
+  while(isDriving()) delay(20);
+}
+
 /**************************************************/
 //drive modifiers
 void setSpeed(int speed){
