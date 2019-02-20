@@ -49,11 +49,34 @@ void backSquare(){
   intakeBallAsync();
   drive(1.9 TL);
 
-
-  //park
+  //align with platform
   drive(-.22 TL);
   turn(90);
   drive(.5 TL);
+
+  //shoot flags
+  drive(-.5);
+  turn(-22);
+  doubleShot();
+
+  //align with wall
+  turn(10);
+  slowDrive(-1.5 TL, -.4 TL);
+
+  //flip cap
+  drive(.17 TL);
+  turn(-93);
+  intake(-80);
+  drive(.9 TL);
+
+  //align with wall
+  drive(-.6 TL);
+  turn(92);
+  drive(-.32 TL);
+
+  //align with platform
+  intake(127);
+  drive(1.5 TL);
   park();
 }
 
@@ -195,7 +218,8 @@ void autonomous() {
 
   switch(auton){
     case 0:
-      bigBoi();
+      drive(-1 TL);
+      //bigBoi();
       break;
     case 1:
       skills();

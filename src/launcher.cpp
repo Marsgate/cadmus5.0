@@ -1,7 +1,7 @@
 #include "main.h"
 
 static int launcherTarget = 0;
-const int rd = 120;
+const int rd = 200;
 
 //motors
 Motor launcher1(LAUNCHER, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
@@ -72,24 +72,24 @@ void launcherTask(void* parameter){
 void launcherOp(){
   static int vel = 0;
   static int ready = true;
-  static bool first = true;
+  static int ratchetEnable = false;
 
-  launcher(vel);
+  vel = 0;
 
   if(master.get_digital(DIGITAL_R2)){
-    vel = 127;
-    first = false;
-  }else
-    vel = 0;
-
-
-  static int panic = false;
-  if(master.get_digital_new_press(DIGITAL_UP))
-    panic = !panic;
-
+    if(isLoaded()){
+      vel = 127;
+    }
+    ratchetEnable = true;
+  }else if(master.get_digital(DIGITAL_A)){
+    if(!isFired()){
+      vel = 127;
+    }
+    ratchetEnable = false;
+  }
 
   //auto ratcheting
-  if(isFired() && !panic && !first){
+  if(isFired() && ratchetEnable){
     ready = false;
     launcher1.tare_position();
   }
@@ -100,4 +100,5 @@ void launcherOp(){
   if(!ready)
     vel = 127;
 
+  launcher(vel);
 }

@@ -47,7 +47,7 @@ int drivePos(){
 
 /**************************************************/
 //slew control
-const int accel_step = 9;
+const int accel_step = 8;
 const int deccel_step = 256; // no decel slew
 static int leftSpeed = 0;
 static int rightSpeed = 0;
@@ -146,7 +146,7 @@ bool isDriving(){
 /**************************************************/
 //autonomous functions
 void driveAsync(int sp){
-  slop(sp);
+  //slop(sp);
   reset();
   driveTarget = sp;
   driveMode = 1;

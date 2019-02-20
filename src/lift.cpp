@@ -1,5 +1,6 @@
 #include "main.h"
 
+static int holdPostion;
 
 Motor lift1(LIFT, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
 
@@ -26,7 +27,7 @@ void liftOp(){
   static int vel;
 
   if(master.get_digital(DIGITAL_Y))
-    liftFast(179);
+    liftFast(190);
   else
     lift(vel);
 
@@ -35,9 +36,15 @@ void liftOp(){
       vel = 127;
     else
       vel = 60;
-  }else if(master.get_digital(DIGITAL_B))
+  }else if(master.get_digital(DIGITAL_B)){
     vel = -127;
-  else
+  }else{
     vel = 0;
+    if(lift1.get_position() > 50 && lift1.get_position() < 550){
+      vel = 10;
+    }else if(lift1.get_position() > 800){
+      vel = -10;
+    }
+  }
 
 }

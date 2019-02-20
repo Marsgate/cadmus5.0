@@ -19,7 +19,7 @@ void doubleShot(){
 
 void park(){
   driveAsync(1.6 TL);
-  while(drivePos() < .91 TL) delay(20);
+  while(drivePos() < 1 TL) delay(20);
   drive(-1);
   reset();
 }
