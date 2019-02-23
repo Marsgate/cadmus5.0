@@ -47,7 +47,7 @@ int drivePos(){
 
 /**************************************************/
 //slew control
-const int accel_step = 8;
+const int accel_step = 9;
 const int deccel_step = 256; // no decel slew
 static int leftSpeed = 0;
 static int rightSpeed = 0;
@@ -93,13 +93,8 @@ void rightSlew(int rightTarget){
 //slop correction
 void slop(int sp){
   driveMode = 2;
-  if(sp > 0){
-    left(10);
-    right(10);
-    delay(100);
-  }else{
-    left(-10);
-    right(-10);
+  if(sp < 0){
+    right(-30);
     delay(100);
   }
   driveMode = 1;

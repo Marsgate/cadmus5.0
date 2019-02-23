@@ -8,8 +8,8 @@ void doubleShot(){
   while(!isLoaded()){
     static int count = 0;
     count++;
-    if(count > 50)
-      return;
+    if(count > 40)
+      break;
     delay(20);
   }
   shoot();
@@ -50,17 +50,28 @@ void wallToFlag(){
 }
 
 void lowFlag(){
-  turn(16);
+  turn(15);
   loadAndClearAsync();
   slowDrive(2.5 TL, 1.1 TL);
 }
 
 void intakeFlip(){
   intake(-30);
-  driveAsync(2.4 TL);
-  while(drivePos() < 1.2 TL) delay(20);
-  setSpeed(70);
-  while(drivePos() < 1.8 TL) delay(20);
+  driveAsync(2.5 TL);
+  while(drivePos() < 1.3 TL) delay(20);
+  setSpeed(60);
+  while(drivePos() < 1.9 TL) delay(20);
   intakeBallAsync();
   while(isDriving()) delay(20);
+}
+
+void backCap(){
+  //back cap
+  intake(-127);
+  slowDrive(2.2 TL, .8 TL);
+
+  //align with wall
+  drive(-2 TL);
+  turn(24);
+  drive(-.5 TL);
 }

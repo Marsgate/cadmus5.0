@@ -29,7 +29,7 @@ void bigBoi(){
 
   //shoot flags in the center
   drive(-.3 TL);
-  if(highFlag)
+  if(!highFlag)
     adjustAsync();
   turn(52);
   shoot();
@@ -43,6 +43,7 @@ void bigBoi(){
   ratchet();
 }
 
+
 /*********************************************************/
 void backSquare(){
   //intake ball under the nearest cap
@@ -55,7 +56,7 @@ void backSquare(){
   drive(.5 TL);
 
   //shoot flags
-  drive(-.5);
+  drive(-.5 TL);
   turn(-22);
   doubleShot();
 
@@ -76,7 +77,7 @@ void backSquare(){
 
   //align with platform
   intake(127);
-  drive(1.5 TL);
+  drive(1.6 TL);
   park();
 }
 
@@ -102,20 +103,46 @@ void zaccAttack(){
   alliancePark();
 }
 
+void biggieCheese(){
+  backCap();
+
+  //intake ball under the nearest cap
+  intakeBallAsync();
+  drive(1.9 TL);
+
+  //align with platform
+  drive(-.21 TL);
+  turn(90);
+  drive(.6 TL);
+
+  //shoot far flag
+  drive(-.5 TL);
+  turn(-44);
+  shoot();
+  ratchetAsync();
+  loadBallAsync();
+
+  //shoot mid flag
+  turn(44);
+  drive(.5 TL);
+  drive(-.5 TL);
+  turn(-22);
+  shoot();
+  ratchetAsync();
+
+  //park
+  turn(22);
+  drive(.5 TL);
+  park();
+}
 
 /*********************************************************/
 void skills(){
-  //cap 1
-  intake(-127);
-  slowDrive(2.1 TL, .9 TL);
-
-  //align with wall
-  drive(-1.95 TL);
-  turn(28);
-  drive(-.5 TL);
+  backCap();
 
   // cap 2
   intakeFlip();
+  turn(-8);
   slowDrive(-2.5 TL, -1.3 TL);
 
   // first flag column =============================
@@ -134,16 +161,16 @@ void skills(){
 
   //cap 3
   intakeBallAsync();
-  drive(2 TL);
+  slowDrive(1.9 TL, 1 TL);
 
   //shoot both flags
-  drive(-.3 TL);
+  drive(-.2 TL);
   turn(72);
   doubleShot();
 
   //toggle the low flag
   drive(1.6 TL);
-  turn(30);
+  turn(27);
   loadAndClearAsync();
   slowDrive(1 TL, .3 TL);
 
@@ -151,7 +178,7 @@ void skills(){
 
   //cap 4
   drive(-1.2 TL);
-  turn(88);
+  turn(89);
   intake(-60);
   slowDrive(1 TL);
 
@@ -165,38 +192,39 @@ void skills(){
 
   //low flag
   intake(0);
-  drive(-.3 TL);
-  turn(65);
+  drive(-.2 TL);
+  turn(64);
   slowDrive(1.7 TL, .5 TL);
 
   // last flags ==========================================
 
-  //align with wall
+  //align with cap 6
   turn(-8);
   drive(-2.1 TL);
-  turn(87);
+  turn(90);
   slowDrive(-1.7 TL, -.5 TL);
 
-  //cap 6
-  intakeFlip();
+  //intake ball
+  intakeBallAsync();
+  drive(1 TL);
 
   //shoot flags
-  drive(-1.25 TL);
+  drive(-.5 TL);
   turn(-97);
   doubleShot();
 
   // park =================================================
 
   //align against the wall
-  turn(-94);
+  turn(-93);
   intake(-127);
   slowDrive(1.4 TL, .4 TL);
 
   //align for park
   drive(-.8 TL);
   turn(-92);
-  drive(1.1 TL);
-  turn(-93);
+  drive(1 TL);
+  turn(-95);
   slowDrive(.6 TL);
 
   //alliance park
@@ -233,6 +261,9 @@ void autonomous() {
     case 4:
       highFlag = true;
       bigBoi();
+      break;
+    case 5:
+      biggieCheese();
       break;
   }
 

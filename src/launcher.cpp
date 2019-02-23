@@ -1,7 +1,7 @@
 #include "main.h"
 
 static int launcherTarget = 0;
-const int rd = 200;
+const int rd = 180;
 
 //motors
 Motor launcher1(LAUNCHER, MOTOR_GEARSET_18, 1, MOTOR_ENCODER_DEGREES);
