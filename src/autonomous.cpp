@@ -142,7 +142,7 @@ void skills(){
 
   // cap 2
   intakeFlip();
-  turn(-8);
+  turn(-10);
   slowDrive(-2.5 TL, -1.3 TL);
 
   // first flag column =============================
@@ -161,10 +161,10 @@ void skills(){
 
   //cap 3
   intakeBallAsync();
-  slowDrive(1.9 TL, 1 TL);
+  slowDrive(2.1 TL, 1 TL);
 
   //shoot both flags
-  drive(-.2 TL);
+  drive(-.4 TL);
   turn(72);
   doubleShot();
 
@@ -199,18 +199,17 @@ void skills(){
   // last flags ==========================================
 
   //align with cap 6
-  turn(-8);
-  drive(-2.1 TL);
+  turn(-5);
+  drive(-2 TL);
   turn(90);
-  slowDrive(-1.7 TL, -.5 TL);
 
   //intake ball
   intakeBallAsync();
   drive(1 TL);
 
   //shoot flags
-  drive(-.5 TL);
-  turn(-97);
+  drive(-1.05 TL);
+  turn(-100);
   doubleShot();
 
   // park =================================================
@@ -223,7 +222,7 @@ void skills(){
   //align for park
   drive(-.8 TL);
   turn(-92);
-  drive(1 TL);
+  drive(1.2 TL);
   turn(-95);
   slowDrive(.6 TL);
 
@@ -246,8 +245,7 @@ void autonomous() {
 
   switch(auton){
     case 0:
-      drive(-1 TL);
-      //bigBoi();
+      bigBoi();
       break;
     case 1:
       skills();

@@ -39,7 +39,7 @@ void backToFront(){
   drive(.2 TL);
   turn(86);
   drive(2.05 TL);
-  turn(-90);
+  turn(-94);
   drive(-.5 TL);
 }
 
@@ -53,25 +53,26 @@ void lowFlag(){
   turn(15);
   loadAndClearAsync();
   slowDrive(2.5 TL, 1.1 TL);
+  turn(-5);
 }
 
 void intakeFlip(){
-  intake(-30);
+  intake(-80);
   driveAsync(2.5 TL);
-  while(drivePos() < 1.3 TL) delay(20);
+  while(drivePos() < 1.2 TL) delay(20);
   setSpeed(60);
-  while(drivePos() < 1.9 TL) delay(20);
+  while(drivePos() < 1.7 TL) delay(20);
   intakeBallAsync();
   while(isDriving()) delay(20);
 }
 
 void backCap(){
   //back cap
-  intake(-127);
-  slowDrive(2.2 TL, .8 TL);
+  intake(-80);
+  slowDrive(2.2 TL, .6 TL);
 
   //align with wall
-  drive(-2 TL);
+  drive(-1.95 TL);
   turn(24);
   drive(-.5 TL);
 }

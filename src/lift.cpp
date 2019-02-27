@@ -27,7 +27,7 @@ void liftOp(){
   static int vel;
 
   if(master.get_digital(DIGITAL_Y))
-    liftFast(190);
+    liftFast(186);
   else
     lift(vel);
 
