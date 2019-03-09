@@ -1,6 +1,7 @@
 #include "main.h"
 
 static int intakeTarget = 0;
+static bool intakeTargetUpdate = false;
 
 //motors
 Motor intake1(INTAKE, MOTOR_GEARSET_36, 1, MOTOR_ENCODER_DEGREES);
@@ -27,7 +28,7 @@ bool hasBall(){
 }
 
 bool isLoaded(){
-  if(line_I.get_value() < 2000)
+  if(line_I.get_value() < 1500 && line_I.get_value() != 0)
     return true;
   else
     return false;
@@ -37,25 +38,28 @@ bool isLoaded(){
 //autonomous control
 void intakeBallAsync(){
   intakeTarget = 1;
+  intakeTargetUpdate = true;
 }
 
 void loadBallAsync(){
   intakeTarget = 2;
+  intakeTargetUpdate = true;
 }
 
 void loadAndClearAsync(){
   intakeTarget = 3;
+  intakeTargetUpdate = true;
 }
 
 void intakeBall(){
   intake(127);
-  while(!hasBall()) delay(20);
+  while(!hasBall() && !intakeTargetUpdate) delay(20);
   intake(0);
 }
 
 void loadBall(){
   intake(127);
-  while(!isLoaded()) delay(20);
+  while(!isLoaded() && !intakeTargetUpdate) delay(20);
   intake(0);
 }
 
@@ -69,6 +73,7 @@ void loadAndClear(){
 void intakeTask(void* parameter){
   while(1){
     delay(20);
+    intakeTargetUpdate = false;
 
     switch(intakeTarget){
       case 1:

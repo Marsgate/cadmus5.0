@@ -25,7 +25,6 @@ void bigBoi(){
   //flip next cap
   intake(-60);
   slowDrive(1.6 TL, .4 TL);
-  intake(0);
 
   //shoot flags in the center
   drive(-.3 TL);
@@ -40,44 +39,32 @@ void bigBoi(){
   setSlant(40);
   delay(300);
   setSlant(0);
+  intake(0);
   ratchet();
 }
 
 
 /*********************************************************/
-void backSquare(){
+void biggieCheese(){
+  backCap();
+
   //intake ball under the nearest cap
   intakeBallAsync();
-  drive(1.9 TL);
+  drive(1.95 TL);
 
   //align with platform
-  drive(-.22 TL);
-  turn(90);
-  drive(.5 TL);
+  drive(-.13 TL);
+  turn(89);
+  drive(.6 TL);
 
-  //shoot flags
-  drive(-.5 TL);
-  turn(-22);
+  //shoot far flags
+  drive(-.32 TL);
+  turn(-46);
   doubleShot();
 
-  //align with wall
-  turn(10);
-  slowDrive(-1.5 TL, -.4 TL);
-
-  //flip cap
-  drive(.17 TL);
-  turn(-93);
-  intake(-80);
-  drive(.9 TL);
-
-  //align with wall
-  drive(-.6 TL);
-  turn(92);
-  drive(-.32 TL);
-
-  //align with platform
-  intake(127);
-  drive(1.6 TL);
+  //park
+  turn(47);
+  drive(.55 TL);
   park();
 }
 
@@ -103,46 +90,13 @@ void zaccAttack(){
   alliancePark();
 }
 
-void biggieCheese(){
-  backCap();
-
-  //intake ball under the nearest cap
-  intakeBallAsync();
-  drive(1.9 TL);
-
-  //align with platform
-  drive(-.21 TL);
-  turn(90);
-  drive(.6 TL);
-
-  //shoot far flag
-  drive(-.5 TL);
-  turn(-44);
-  shoot();
-  ratchetAsync();
-  loadBallAsync();
-
-  //shoot mid flag
-  turn(44);
-  drive(.5 TL);
-  drive(-.5 TL);
-  turn(-22);
-  shoot();
-  ratchetAsync();
-
-  //park
-  turn(22);
-  drive(.5 TL);
-  park();
-}
-
 /*********************************************************/
 void skills(){
   backCap();
 
   // cap 2
   intakeFlip();
-  turn(-10);
+  turn(-4);
   slowDrive(-2.5 TL, -1.3 TL);
 
   // first flag column =============================
@@ -154,8 +108,7 @@ void skills(){
   // second flag column =============================
 
   //backup to align with next cap
-  loadAndClearAsync();
-  drive(-1.95 TL);
+  drive(-2.05 TL);
   turn(-90);
   drive(-.5 TL);
 
@@ -164,60 +117,55 @@ void skills(){
   slowDrive(2.1 TL, 1 TL);
 
   //shoot both flags
-  drive(-.4 TL);
-  turn(72);
+  drive(-.26 TL);
+  turn(76);
   doubleShot();
 
   //toggle the low flag
-  drive(1.6 TL);
-  turn(27);
-  loadAndClearAsync();
-  slowDrive(1 TL, .3 TL);
+  turn(8);
+  slowDrive(2.5 TL, 1.2 TL);
 
   // third column low flag ============================
 
   //cap 4
   drive(-1.2 TL);
   turn(89);
-  intake(-60);
-  slowDrive(1 TL);
+  intake(-40);
+  slowDrive(1.2 TL);
 
   //cap 5
   drive(-.3 TL);
-  turn(171);
-  intake(-60);
-  drive(2.1 TL);
-  turn(38);
-  slowDrive(.8 TL);
+  turn(177);
+  slowDrive(3 TL, 1 TL);
 
   //low flag
-  intake(0);
-  drive(-.2 TL);
-  turn(64);
-  slowDrive(1.7 TL, .5 TL);
+  drive(-.4 TL);
+  turn(80);
+  slowDrive(1.4 TL, .5 TL);
 
   // last flags ==========================================
 
   //align with cap 6
-  turn(-5);
+  turn(-7);
   drive(-2 TL);
-  turn(90);
+  turn(92);
 
   //intake ball
   intakeBallAsync();
-  drive(1 TL);
+  slowDrive(.9 TL);
 
   //shoot flags
   drive(-1.05 TL);
   turn(-100);
   doubleShot();
 
+
   // park =================================================
 
   //align against the wall
   turn(-93);
   intake(-127);
-  slowDrive(1.4 TL, .4 TL);
+  slowDrive(1.4 TL, 1 TL);
 
   //align for park
   drive(-.8 TL);
@@ -251,7 +199,7 @@ void autonomous() {
       skills();
       break;
     case 2:
-      backSquare();
+      biggieCheese();
       break;
     case 3:
       zaccAttack();
@@ -259,9 +207,6 @@ void autonomous() {
     case 4:
       highFlag = true;
       bigBoi();
-      break;
-    case 5:
-      biggieCheese();
       break;
   }
 
