@@ -73,14 +73,24 @@ void launcherOp(){
   static int vel = 0;
   static int ready = true;
   static int ratchetEnable = false;
+  static int panic;
+
+  if(master.get_digital_new_press(DIGITAL_UP)){
+    panic = !panic;
+  }
 
   vel = 0;
 
   if(master.get_digital(DIGITAL_R2)){
-    if(isLoaded()){
+    if(panic){
       vel = 127;
+      ratchetEnable = false;
+    }else{
+      if(isLoaded()){
+        vel = 127;
+      }
+      ratchetEnable = true;
     }
-    ratchetEnable = true;
   }else if(master.get_digital(DIGITAL_A)){
     if(!isFired()){
       vel = 127;

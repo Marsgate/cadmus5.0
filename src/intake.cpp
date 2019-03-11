@@ -28,7 +28,7 @@ bool hasBall(){
 }
 
 bool isLoaded(){
-  if(line_I.get_value() < 1500 && line_I.get_value() != 0)
+  if(line_I.get_value() < 1800 && line_I.get_value() != 0)
     return true;
   else
     return false;

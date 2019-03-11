@@ -31,27 +31,27 @@ void alliancePark(){
   while(drivePos() < 1.4 TL) delay(20);
   setSpeed(20);
   while(isDriving()) delay(20);
-  driveAsync(.3 TL);
-  setSpeed(30);
+  driveAsync(.35 TL);
+  setSpeed(20);
   while(isDriving()) delay(20);
 }
 
 void backToFront(){
   drive(.2 TL);
   turn(86);
-  drive(2.00 TL);
+  drive(1.94 TL);
   turn(-94);
   drive(-.5 TL);
 }
 
 void wallToFlag(){
   drive(.22 TL);
-  turn(85);
+  turn(86);
   doubleShot();
 }
 
 void lowFlag(){
-  turn(14);
+  turn(13);
   loadAndClearAsync();
   slowDrive(2.5 TL, 1.1 TL);
 }

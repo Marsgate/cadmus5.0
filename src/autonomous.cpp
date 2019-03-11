@@ -108,7 +108,8 @@ void skills(){
   // second flag column =============================
 
   //backup to align with next cap
-  drive(-2.05 TL);
+  turn(2);
+  drive(-2.0 TL);
   turn(-90);
   drive(-.5 TL);
 
@@ -118,11 +119,11 @@ void skills(){
 
   //shoot both flags
   drive(-.26 TL);
-  turn(76);
+  turn(75);
   doubleShot();
 
   //toggle the low flag
-  turn(8);
+  turn(9);
   slowDrive(2.5 TL, 1.2 TL);
 
   // third column low flag ============================
