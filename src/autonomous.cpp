@@ -90,98 +90,6 @@ void zaccAttack(){
   alliancePark();
 }
 
-/*********************************************************/
-void skills(){
-  backCap();
-
-  // cap 2
-  intakeFlip();
-  turn(-4);
-  slowDrive(-2.5 TL, -1.3 TL);
-
-  // first flag column =============================
-
-  backToFront();
-  wallToFlag();
-  lowFlag();
-
-  // second flag column =============================
-
-  //backup to align with next cap
-  turn(2);
-  drive(-2.0 TL);
-  turn(-90);
-  drive(-.5 TL);
-
-  //cap 3
-  intakeBallAsync();
-  slowDrive(2.1 TL, 1 TL);
-
-  //shoot both flags
-  drive(-.26 TL);
-  turn(75);
-  doubleShot();
-
-  //toggle the low flag
-  turn(9);
-  slowDrive(2.5 TL, 1.2 TL);
-
-  // third column low flag ============================
-
-  //cap 4
-  drive(-1.2 TL);
-  turn(89);
-  intake(-40);
-  slowDrive(1.2 TL);
-
-  //cap 5
-  drive(-.3 TL);
-  turn(177);
-  slowDrive(3 TL, 1 TL);
-
-  //low flag
-  drive(-.4 TL);
-  turn(80);
-  slowDrive(1.4 TL, .5 TL);
-
-  // last flags ==========================================
-
-  //align with cap 6
-  turn(-7);
-  drive(-2 TL);
-  turn(92);
-
-  //intake ball
-  intakeBallAsync();
-  slowDrive(.9 TL);
-
-  //shoot flags
-  drive(-1.05 TL);
-  turn(-100);
-  doubleShot();
-
-
-  // park =================================================
-
-  //align against the wall
-  turn(-93);
-  intake(-127);
-  slowDrive(1.4 TL, 1 TL);
-
-  //align for park
-  drive(-.8 TL);
-  turn(-92);
-  drive(1.2 TL);
-  turn(-95);
-  slowDrive(.6 TL);
-
-  //alliance park
-  alliancePark();
-
-  //center park
-  park();
-}
-
 void autonomous() {
   highFlag = false;
   reset(); // reset the drive encoders
@@ -197,7 +105,7 @@ void autonomous() {
       bigBoi();
       break;
     case 1:
-      skills();
+      newSkills();
       break;
     case 2:
       biggieCheese();

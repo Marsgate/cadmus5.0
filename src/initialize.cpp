@@ -34,14 +34,14 @@ void autonSelector(void* parameter){
 
       lcd::print(2, "%s", autoNames[auton]);
       while(nav.get_value() < 2100) delay(20);
-      delay(100);
+      delay(300);
     }
 
     if(color.get_value() < 2100){
       mirror = !mirror;
       lcd::print(4, "%s", mirror ? "blue" : "red");
       while(color.get_value() < 2100) delay(20);
-      delay(100);
+      delay(300);
     }
 
     delay(50);

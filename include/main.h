@@ -12,6 +12,7 @@
 #include "adjuster.hpp"
 #include "lift.hpp"
 #include "macros.hpp"
+#include "skills.hpp"
 
 //ports
 #define LEFTFRONT 17

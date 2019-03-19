@@ -20,18 +20,15 @@ void doubleShot(){
 
 void park(){
   driveAsync(1.6 TL);
-  while(drivePos() < 1 TL) delay(20);
+  while(drivePos() < 1.15 TL) delay(20);
   drive(-1);
   reset();
 }
 
 void alliancePark(){
   intake(127);
-  driveAsync(1.8 TL);
+  driveAsync(2 TL);
   while(drivePos() < 1.4 TL) delay(20);
-  setSpeed(20);
-  while(isDriving()) delay(20);
-  driveAsync(.35 TL);
   setSpeed(20);
   while(isDriving()) delay(20);
 }
@@ -39,8 +36,8 @@ void alliancePark(){
 void backToFront(){
   drive(.2 TL);
   turn(86);
-  drive(1.94 TL);
-  turn(-94);
+  drive(1.91 TL);
+  turn(-93);
   drive(-.5 TL);
 }
 
@@ -72,7 +69,7 @@ void backCap(){
   slowDrive(2.2 TL, .6 TL);
 
   //align with wall
-  drive(-1.83 TL);
+  drive(-1.8 TL);
   turn(32);
   drive(-.6 TL);
 }
