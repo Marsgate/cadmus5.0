@@ -31,7 +31,12 @@ void bigBoi(){
   //shoot flags in the center
   adjustAsync();
   intake(-20);
-  turn(60);
+
+  if(!mirror)
+    turn(58);
+  else
+    turn(60);
+
   intake(0);
   drive(-.5 TL);
   shoot();
@@ -41,12 +46,16 @@ void bigBoi(){
   intake(127);
   driveAsync(1.6 TL);
   while(drivePos() < .5 TL) delay(20);
-  setSlant(40);
+  if(!mirror)
+    setSlant(40);
+  else
+    setSlant(20);
   shootAsync();
   delay(300);
   setSlant(0);
   intake(0);
   ratchet();
+  delay(1000);
 }
 
 

@@ -108,8 +108,8 @@ bool isDriving(){
   static int last = 0;
   static int lastTarget = 0;
 
-  int leftPos = left1.get_position();
-  int rightPos = right1.get_position();
+  int leftPos = left2.get_position();
+  int rightPos = right2.get_position();
 
   int curr = (abs(leftPos) + abs(rightPos))/2;
   int thresh = 3;
