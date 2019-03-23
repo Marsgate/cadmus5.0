@@ -32,7 +32,7 @@ void liftOp(){
     lift(vel);
 
   if(master.get_digital(DIGITAL_X)){
-    if(lift1.get_position() < 500)
+    if(lift1.get_position() < 550)
       vel = 127;
     else
       vel = 60;

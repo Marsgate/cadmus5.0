@@ -4,16 +4,18 @@ bool highFlag;
 
 /*********************************************************/
 void bigBoi(){
+  adjustAsync(); //start at low angle
+
   //intake ball under the nearest cap
   intakeBallAsync();
   drive(1.9 TL);
 
   //back up against wall
-  drive(-2 TL);
+  slowDrive(-2 TL, -.8 TL);
 
   //toggle flag column
   wallToFlag();
-  lowFlag();
+  lowFlagIndex();
 
   //backup to align with next cap
   drive(-1.1 TL);
@@ -24,19 +26,23 @@ void bigBoi(){
 
   //flip next cap
   intake(-60);
-  slowDrive(1.6 TL, .4 TL);
+  slowDrive(1.5 TL, .4 TL);
 
   //shoot flags in the center
-  drive(-.3 TL);
-  if(!highFlag)
-    adjustAsync();
-  turn(52);
+  adjustAsync();
+  intake(-20);
+  turn(60);
+  intake(0);
+  drive(-.5 TL);
   shoot();
+  ratchetAsync();
 
   //low flag
+  intake(127);
   driveAsync(1.6 TL);
   while(drivePos() < .5 TL) delay(20);
   setSlant(40);
+  shootAsync();
   delay(300);
   setSlant(0);
   intake(0);

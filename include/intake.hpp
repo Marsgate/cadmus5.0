@@ -9,10 +9,12 @@ bool isLoaded();
 void intakeBallAsync();
 void loadBallAsync();
 void loadAndClearAsync();
+void indexBallAsync();
 
 void intakeBall();
 void loadBall();
 void loadAndClear();
+void indexBall();
 
 void intakeTask(void* parameter);
 

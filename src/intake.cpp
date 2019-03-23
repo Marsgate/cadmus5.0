@@ -51,6 +51,11 @@ void loadAndClearAsync(){
   intakeTargetUpdate = true;
 }
 
+void indexBallAsync(){
+  intakeTarget = 4;
+  intakeTargetUpdate = true;
+}
+
 void intakeBall(){
   intake(127);
   while(!hasBall() && !intakeTargetUpdate) delay(20);
@@ -66,6 +71,13 @@ void loadBall(){
 void loadAndClear(){
   loadBall();
   intake(-127);
+}
+
+void indexBall(){
+  loadBall();
+  intake(127);
+  delay(1000);
+  adjust();
 }
 
 /**************************************************/
@@ -84,6 +96,10 @@ void intakeTask(void* parameter){
         break;
       case 3:
         loadAndClear();
+        break;
+      case 4:
+        indexBall();
+        break;
     }
 
     intakeTarget = 0;
@@ -100,7 +116,7 @@ void intakeOp(){
   if(master.get_digital(DIGITAL_R1))
     vel = 127;
   else if(master.get_digital(DIGITAL_L1))
-    vel = -30;
+    vel = -60;
   else
     vel = 0;
 }

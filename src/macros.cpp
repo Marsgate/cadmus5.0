@@ -14,7 +14,6 @@ void doubleShot(){
   }
   delay(200);
   shoot();
-  adjustAsync();
   ratchetAsync();
 }
 
@@ -42,14 +41,20 @@ void backToFront(){
 }
 
 void wallToFlag(){
-  drive(.22 TL);
-  turn(86);
+  drive(.2 TL);
+  turn(83);
   doubleShot();
 }
 
 void lowFlag(){
-  turn(13);
+  turn(17);
   loadAndClearAsync();
+  slowDrive(2.4 TL, 1.1 TL);
+}
+
+void lowFlagIndex(){
+  turn(17);
+  indexBallAsync();
   slowDrive(2.5 TL, 1.1 TL);
 }
 
