@@ -1,7 +1,7 @@
 #include "main.h"
 
 static int adjusterTarget = 0;
-static int d = -1;
+int d = 1;
 
 //motors
 Motor adjuster1(ADJUSTER, MOTOR_GEARSET_6, 1);

@@ -106,6 +106,8 @@ void zaccAttack(){
 }
 
 void autonomous() {
+  d = -1; //set angle adjuster starting height
+  
   highFlag = false;
   reset(); // reset the drive encoders
 
