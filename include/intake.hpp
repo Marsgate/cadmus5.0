@@ -10,11 +10,13 @@ void intakeBallAsync();
 void loadBallAsync();
 void loadAndClearAsync();
 void indexBallAsync();
+void unindexBallAsync();
 
 void intakeBall();
 void loadBall();
 void loadAndClear();
 void indexBall();
+void unindexBall();
 
 void intakeTask(void* parameter);
 

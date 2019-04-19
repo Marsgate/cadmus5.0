@@ -108,18 +108,13 @@ bool isDriving(){
   static int last = 0;
   static int lastTarget = 0;
 
-  int leftPos = left2.get_position();
-  int rightPos = right2.get_position();
+  int curr = left2.get_position();
 
-  int curr = (abs(leftPos) + abs(rightPos))/2;
-  int thresh = 3;
   int target = turnTarget;
-
   if(driveMode == 1)
     target = driveTarget;
 
-
-  if(abs(last-curr) < thresh)
+  if(abs(last-curr) < 3)
     count++;
   else
     count = 0;
@@ -234,9 +229,7 @@ void driveTask(void* parameter){
     double kd = .5;
 
     //read sensors
-    int ls = left1.get_position();
-    int rs = right1.get_position();
-    int sv = ls;
+    int sv = left2.get_position();
 
     //speed
     int error = sp-sv;

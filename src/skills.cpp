@@ -6,7 +6,7 @@ void newSkills(){
 
   //cap 1
   intakeFlip();
-  drive(-.6 TL);
+  drive(-.55 TL);
   adjustAsync();
 
   //cap 2
@@ -21,21 +21,19 @@ void newSkills(){
 
   //wall align
   drive(-.3 TL);
-  turn(-55);
-  drive(2.3 TL);
-  turn(30);
-  drive(.7 TL);
+  turn(-57);
+  drive(2.5 TL);
+  turn(28);
+  drive(.6 TL);
 
   // first flag column =============================
 
   //back to front
   drive(-.3 TL);
   turn(-93);
-  drive(2 TL);
-  adjustAsync();
-  intake(-20);
+  drive(1.8 TL);
+  unindexBallAsync();
   turn(-93);
-  intake(0);
   drive(-.6 TL);
 
   wallToFlag();
@@ -44,48 +42,48 @@ void newSkills(){
   // second flag column =============================
 
   //backup to align with next cap
-  turn(2);
-  drive(-2.06 TL);
+  drive(-2.2 TL);
   turn(-90);
   drive(-.5 TL);
 
-  //cap 3
+  //cap 4
   intakeBallAsync();
-  slowDrive(2.1 TL, 1 TL);
+  intake(127);
+  slowDrive(2.1 TL, .7 TL);
 
   //shoot both flags
-  drive(-.25 TL);
-  turn(75);
+  drive(-.3 TL);
+  turn(77);
   doubleShot();
 
   //toggle the low flag
-  turn(11);
-  slowDrive(2.5 TL, 1.2 TL);
+  turn(12);
+  slowDrive(2.7 TL, 1.2 TL);
 
   // third column low flag ============================
 
-  //cap 4
-  drive(-1.2 TL);
-  turn(89);
+  //cap 5
+  drive(-1.3 TL);
+  turn(90);
   intake(-60);
   slowDrive(1.1 TL);
 
-  //cap 5
+  //cap 6
   intake(-40);
   drive(-.3 TL);
-  turn(175);
+  turn(173);
   slowDrive(3 TL, 1 TL);
 
   //low flag
-  drive(-.4 TL);
+  drive(-.5 TL);
   turn(80);
   slowDrive(1.4 TL, .5 TL);
 
   // last flags ==========================================
 
-  //align with cap 6
+  //align with cap 7
   turn(-6);
-  drive(-2.05 TL);
+  drive(-2.15 TL);
   turn(92);
 
   //intake ball
@@ -93,20 +91,19 @@ void newSkills(){
   slowDrive(.9 TL);
 
   //shoot flags
-  drive(-.45 TL);
-  turn(-115);
+  drive(-.4 TL);
+  turn(-114);
   doubleShot();
 
-  //flip cap
-  intake(-50);
-  turn(108);
-  slowDrive(1.6 TL);
+  //flip caps
+  intake(-60);
+  turn(107);
+  slowDrive(1.5 TL, .3 TL);
 
 
   // park =================================================
-
-  turn(-9);
-  drive(-2.6 TL);
+  turn(3);
+  drive(-2.7 TL);
   turn(88);
   drive(1 TL);
   turn(-93);

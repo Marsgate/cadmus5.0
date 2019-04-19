@@ -25,17 +25,14 @@ void bigBoi(){
   drive(-.5 TL);
 
   //flip next cap
-  intake(-60);
-  slowDrive(1.5 TL, .4 TL);
+  intake(-100);
+  slowDrive(1.5 TL, .5 TL);
 
   //shoot flags in the center
   adjustAsync();
   intake(-20);
 
-  if(!mirror)
-    turn(58);
-  else
-    turn(60);
+  turn(58);
 
   intake(0);
   drive(-.5 TL);
@@ -44,18 +41,14 @@ void bigBoi(){
 
   //low flag
   intake(127);
-  driveAsync(1.6 TL);
-  while(drivePos() < .5 TL) delay(20);
-  if(!mirror)
-    setSlant(40);
-  else
-    setSlant(20);
+  driveAsync(2 TL);
+  while(drivePos() < .4 TL) delay(20);
+  setSlant(45);
   shootAsync();
   delay(300);
   setSlant(0);
   intake(0);
   ratchet();
-  delay(1000);
 }
 
 
@@ -107,7 +100,7 @@ void zaccAttack(){
 
 void autonomous() {
   d = -1; //set angle adjuster starting height
-  
+
   highFlag = false;
   reset(); // reset the drive encoders
 

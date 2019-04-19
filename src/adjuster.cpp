@@ -22,7 +22,7 @@ void adjustAsync(){
 void adjust(){
   d = -d;
   adjuster(127*d);
-  delay(500);
+  delay(600);
   adjuster(0);
 }
 
@@ -47,7 +47,7 @@ void adjustTask(void* parameter){
 void adjusterOp(){
   static int vel = 0;
   static int t = 0;
-  int amount = 25;
+  int amount = 30;
 
   if(t <= amount)
     t++;

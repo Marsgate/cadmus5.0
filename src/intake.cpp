@@ -56,6 +56,11 @@ void indexBallAsync(){
   intakeTargetUpdate = true;
 }
 
+void unindexBallAsync(){
+  intakeTarget = 5;
+  intakeTargetUpdate = true;
+}
+
 void intakeBall(){
   intake(127);
   while(!hasBall() && !intakeTargetUpdate) delay(20);
@@ -80,6 +85,13 @@ void indexBall(){
   adjust();
 }
 
+void unindexBall(){
+  intake(-30);
+  adjust();
+  while(!isLoaded() && !intakeTargetUpdate) delay(20);
+  intake(0);
+}
+
 /**************************************************/
 //task control
 void intakeTask(void* parameter){
@@ -99,6 +111,9 @@ void intakeTask(void* parameter){
         break;
       case 4:
         indexBall();
+        break;
+      case 5:
+        unindexBall();
         break;
     }
 
