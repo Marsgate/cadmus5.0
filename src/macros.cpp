@@ -41,19 +41,19 @@ void backToFront(){
 }
 
 void wallToFlag(){
-  drive(.22 TL);
-  turn(84);
+  drive(.2 TL);
+  turn(87);
   doubleShot();
 }
 
 void lowFlag(){
-  turn(13);
+  turn(15);
   loadAndClearAsync();
   slowDrive(2.4 TL, 1.1 TL);
 }
 
 void lowFlagIndex(){
-  turn(13);
+  turn(15);
   indexBallAsync();
   slowDrive(2.5 TL, 1.1 TL);
 }

@@ -18,7 +18,7 @@ void bigBoi(){
   lowFlagIndex();
 
   //backup to align with next cap
-  drive(-1.1 TL);
+  drive(-1.2 TL);
 
   //line up with the wall
   turn(-90);
@@ -26,44 +26,39 @@ void bigBoi(){
 
   //flip next cap
   intake(-100);
-  slowDrive(1.5 TL, .5 TL);
+  slowDrive(1.5 TL, .2 TL);
 
   //shoot flags in the center
-  adjustAsync();
-  intake(-20);
-
-  turn(58);
-
-  intake(0);
+  unindexBallAsync();
+  turn(60);
   drive(-.5 TL);
-  shoot();
-  ratchetAsync();
-
-  //low flag
-  intake(127);
-  driveAsync(2 TL);
-  while(drivePos() < .4 TL) delay(20);
-  setSlant(45);
-  shootAsync();
-  delay(300);
-  setSlant(0);
-  intake(0);
-  ratchet();
+  doubleShot();
+  drive(-.5 TL);
 }
 
 
 /*********************************************************/
 void biggieCheese(){
-  backCap();
 
   //intake ball under the nearest cap
-  intakeBallAsync();
+  intake(127);
   drive(1.95 TL);
+  delay(500);
+  adjustAsync();
+
+  //cap 2
+  drive(-.2 TL);
+  turn(-80);
+  intake(-127);
+  drive(.8 TL);
+  unindexBallAsync();
 
   //align with platform
-  drive(-.13 TL);
-  turn(89);
-  drive(.6 TL);
+  drive(-.3 TL);
+  turn(-180);
+  drive(.7 TL);
+  turn(-30);
+  slowDrive(.5 TL);
 
   //shoot far flags
   drive(-.32 TL);

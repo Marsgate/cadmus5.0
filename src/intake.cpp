@@ -16,6 +16,7 @@ ADILineSensor line_I('H');
 //basic control
 void intake(int vel){
   intake1.move_velocity(vel);
+  intake1.set_brake_mode(MOTOR_BRAKE_BRAKE);
 }
 
 /**************************************************/
@@ -81,12 +82,12 @@ void loadAndClear(){
 void indexBall(){
   loadBall();
   intake(127);
-  delay(1000);
+  delay(1500);
   adjust();
 }
 
 void unindexBall(){
-  intake(-30);
+  intake(-127);
   adjust();
   while(!isLoaded() && !intakeTargetUpdate) delay(20);
   intake(0);
