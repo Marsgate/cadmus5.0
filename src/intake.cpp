@@ -76,7 +76,8 @@ void loadBall(){
 
 void loadAndClear(){
   loadBall();
-  intake(-127);
+  if(!intakeTargetUpdate)
+    intake(-127);
 }
 
 void indexBall(){
@@ -87,9 +88,9 @@ void indexBall(){
 }
 
 void unindexBall(){
-  intake(-127);
+  intake(-40);
   adjust();
-  while(!isLoaded() && !intakeTargetUpdate) delay(20);
+  while(!hasBall() && !intakeTargetUpdate) delay(20);
   intake(0);
 }
 

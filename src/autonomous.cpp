@@ -25,15 +25,15 @@ void bigBoi(){
   drive(-.5 TL);
 
   //flip next cap
-  intake(-100);
-  slowDrive(1.5 TL, .2 TL);
+  intake(-70);
+  slowDrive(1.4 TL, .2 TL);
+  intake(0);
 
   //shoot flags in the center
   unindexBallAsync();
-  turn(60);
-  drive(-.5 TL);
+  turn(58);
+  drive(-.7 TL);
   doubleShot();
-  drive(-.5 TL);
 }
 
 

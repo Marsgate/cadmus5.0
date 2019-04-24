@@ -15,7 +15,7 @@ void driveAsync(int sp);
 void turnAsync(int sp);
 void drive(int sp);
 void turn(int sp);
-void slowDrive(int sp, int dp = 0);
+void slowDrive(int sp, int dp = 50);
 
 void setSpeed(int speed);
 void setSlant(int s);

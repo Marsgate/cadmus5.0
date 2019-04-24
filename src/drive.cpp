@@ -2,6 +2,8 @@
 
 #define MAX 127;
 
+const int fc = 1; //friction coefficient
+
 static int driveMode = 1;
 static int driveTarget = 0;
 static int turnTarget = 0;
@@ -264,8 +266,8 @@ void turnTask(void* parameter){
     else
       sp *= 2.3;
 
-    double kp = .9;
-    double kd = 3.5;
+    double kp = .9*fc;
+    double kd = 3.5/fc;
 
     int sv = (right1.get_position() - left1.get_position())/2;
     int error = sp-sv;

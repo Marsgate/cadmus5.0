@@ -6,7 +6,7 @@ void newSkills(){
 
   //cap 1
   intakeFlip();
-  drive(-.55 TL);
+  drive(-.5 TL);
   adjustAsync();
 
   //cap 2
@@ -15,8 +15,8 @@ void newSkills(){
   slowDrive(1.7 TL, .3 TL);
 
   //cap 3
-  drive(-.5 TL);
-  turn(-115);
+  drive(-.45 TL);
+  turn(-117);
   slowDrive(.7 TL);
 
   //wall align
@@ -30,8 +30,8 @@ void newSkills(){
 
   //back to front
   drive(-.3 TL);
-  turn(-93);
-  drive(1.8 TL);
+  turn(-94);
+  drive(1.9 TL);
   unindexBallAsync();
   turn(-93);
   drive(-.6 TL);
@@ -42,22 +42,22 @@ void newSkills(){
   // second flag column =============================
 
   //backup to align with next cap
-  drive(-2.2 TL);
+  drive(-2.14 TL);
   turn(-90);
   drive(-.5 TL);
 
   //cap 4
   intakeBallAsync();
   intake(127);
-  slowDrive(2.1 TL, .7 TL);
+  slowDrive(2.1 TL, .5 TL);
 
   //shoot both flags
-  drive(-.3 TL);
-  turn(77);
+  drive(-.33 TL);
+  turn(78);
   doubleShot();
 
   //toggle the low flag
-  turn(12);
+  turn(11);
   slowDrive(2.7 TL, 1.2 TL);
 
   // third column low flag ============================
@@ -65,19 +65,19 @@ void newSkills(){
   //cap 5
   drive(-1.3 TL);
   turn(90);
-  intake(-60);
+  intake(-40);
   slowDrive(1.1 TL);
 
   //cap 6
-  intake(-40);
   drive(-.3 TL);
-  turn(173);
+  turn(175);
   slowDrive(3 TL, 1 TL);
 
   //low flag
-  drive(-.5 TL);
+  drive(-.45 TL);
   turn(80);
   slowDrive(1.4 TL, .5 TL);
+  turn(5);
 
   // last flags ==========================================
 
@@ -105,7 +105,7 @@ void newSkills(){
   turn(3);
   drive(-2.7 TL);
   turn(88);
-  drive(1 TL);
+  drive(1.1 TL);
   turn(-93);
   drive(.6 TL);
 
