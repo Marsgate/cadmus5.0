@@ -42,7 +42,7 @@ void backToFront(){
 
 void wallToFlag(){
   drive(.2 TL);
-  turn(84);
+  turn(85);
   doubleShot();
 }
 

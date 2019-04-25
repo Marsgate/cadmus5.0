@@ -2,7 +2,7 @@
 
 #define MAX 127;
 
-const int fc = 1; //friction coefficient
+const double fc = 1; //friction coefficient
 
 static int driveMode = 1;
 static int driveTarget = 0;
