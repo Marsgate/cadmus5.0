@@ -11,29 +11,30 @@ void bigBoi(){
   drive(1.9 TL);
 
   //back up against wall
-  slowDrive(-2 TL, -.8 TL);
+  slowDrive(-2.1 TL, -1.2 TL);
 
   //toggle flag column
   wallToFlag();
   lowFlagIndex();
 
   //backup to align with next cap
-  drive(-1.2 TL);
+  drive(-1.18 TL);
 
   //line up with the wall
   turn(-90);
-  drive(-.5 TL);
+  drive(-.6 TL);
 
   //flip next cap
   intake(-70);
-  slowDrive(1.4 TL, .2 TL);
+  slowDrive(1.3 TL, .2 TL);
   intake(0);
 
   //shoot flags in the center
   unindexBallAsync();
-  turn(58);
-  drive(-.7 TL);
+  turn(57);
+  drive(-.4 TL);
   doubleShot();
+  // hi micah ur cool
 }
 
 
@@ -47,26 +48,28 @@ void biggieCheese(){
   adjustAsync();
 
   //cap 2
-  drive(-.2 TL);
-  turn(-80);
+  drive(-1.5 TL);
+  //turn(-35);
+  turn(-38);
   intake(-127);
-  drive(.8 TL);
+  slowDrive(1.9 TL, .4 TL);
   unindexBallAsync();
 
   //align with platform
-  drive(-.3 TL);
-  turn(-180);
-  drive(.7 TL);
-  turn(-30);
-  slowDrive(.5 TL);
+  drive(-.8 TL);
+  //turn(118);
+  turn(122);
+  slowDrive(1.2 TL, .4 TL);
 
   //shoot far flags
-  drive(-.32 TL);
-  turn(-46);
+  drive(-.3 TL);
+  //turn(-49);
+  turn(-45);
   doubleShot();
 
   //park
-  turn(47);
+  //turn(49);
+  turn(45);
   drive(.55 TL);
   park();
 }
@@ -117,10 +120,6 @@ void autonomous() {
       break;
     case 3:
       zaccAttack();
-      break;
-    case 4:
-      highFlag = true;
-      bigBoi();
       break;
   }
 
